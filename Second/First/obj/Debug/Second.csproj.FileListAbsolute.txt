@@ -1,0 +1,13 @@
+D:\Git\second\Second\First\bin\Second.dll.config
+D:\Git\second\Second\First\bin\Second.dll
+D:\Git\second\Second\First\bin\Second.pdb
+D:\Git\second\Second\First\bin\EntityFramework.dll
+D:\Git\second\Second\First\bin\EntityFramework.SqlServer.dll
+D:\Git\second\Second\First\bin\Premotion.AspNet.AppHarbor.Integration.dll
+D:\Git\second\Second\First\bin\EntityFramework.xml
+D:\Git\second\Second\First\bin\EntityFramework.SqlServer.xml
+D:\Git\second\Second\First\bin\Premotion.AspNet.AppHarbor.Integration.pdb
+D:\Git\second\Second\First\bin\Premotion.AspNet.AppHarbor.Integration.xml
+D:\Git\second\Second\First\obj\Debug\Second.dll
+D:\Git\second\Second\First\obj\Debug\Second.pdb
+D:\Git\second\second\First\obj\Debug\Second.csprojResolveAssemblyReference.cache

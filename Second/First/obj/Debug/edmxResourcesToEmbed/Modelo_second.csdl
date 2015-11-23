@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbecc20a0950a3450cad9aa555018154efModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="PerfilSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UsuarioSet" Relationship="Self.FK_UsuarioPerfil" FromRole="PerfilSet" ToRole="UsuarioSet" />
+  </EntityType>
+  <EntityType Name="UsuarioSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nick" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="uuid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Perfil_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PerfilSet" Relationship="Self.FK_UsuarioPerfil" FromRole="UsuarioSet" ToRole="PerfilSet" />
+  </EntityType>
+  <Association Name="FK_UsuarioPerfil">
+    <End Role="PerfilSet" Type="Self.PerfilSet" Multiplicity="1" />
+    <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PerfilSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioSet">
+        <PropertyRef Name="Perfil_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbecc20a0950a3450cad9aa555018154efEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PerfilSet" EntityType="Self.PerfilSet" />
+    <EntitySet Name="UsuarioSet" EntityType="Self.UsuarioSet" />
+    <AssociationSet Name="FK_UsuarioPerfil" Association="Self.FK_UsuarioPerfil">
+      <End Role="PerfilSet" EntitySet="PerfilSet" />
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

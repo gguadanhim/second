@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Modelo_dados_second.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="PerfilSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="foto" Type="varbinary(max)" Nullable="false" />
+    <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="conteudo_foto" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UsuarioSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nick" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="uuid" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Perfil_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_UsuarioPerfil">
+    <End Role="PerfilSet" Type="Self.PerfilSet" Multiplicity="1" />
+    <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PerfilSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioSet">
+        <PropertyRef Name="Perfil_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Modelo_dados_secondStoreContainer">
+    <EntitySet Name="PerfilSet" EntityType="Self.PerfilSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsuarioSet" EntityType="Self.UsuarioSet" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_UsuarioPerfil" Association="Self.FK_UsuarioPerfil">
+      <End Role="PerfilSet" EntitySet="PerfilSet" />
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

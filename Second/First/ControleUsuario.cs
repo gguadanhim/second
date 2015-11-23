@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Second
+{
+    public class ControleUsuario
+    {
+        public ControleUsuario()
+        {
+
+        }
+
+        public Boolean verificalogin(String asLogin)
+        {
+            Boolean lbRetorno = false;
+            try
+            {
+                using (var banco = new Modelo_second())
+                {
+                    var listaUsuarios = from p in banco.UsuarioSet
+                                        where (p.nick) == (asLogin)
+                                       select p;
+
+                    if (listaUsuarios.Count() == 0)
+                    {
+                        lbRetorno = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+            }
+                 
+            return lbRetorno;
+        }
+
+        //public List<Jogador> getJogadores()
+        //{
+        //    List<Jogador> lListaJogadores = new List<Jogador>();
+
+        //    using (var banco = new Modelo_dadosContainer())
+        //    {
+
+        //        var listaJogadores = from p in banco.JogadorSet
+        //                             select p;
+
+        //        foreach (Jogador item in listaJogadores)
+        //        {
+        //            lListaJogadores.Add(item);
+        //        }
+        //    }
+
+        //    return lListaJogadores;
+        //}
+
+        public Boolean cadastrarUsuario(String asUserId,String asUUID,byte[] asFoto, String asNome)
+        {
+            Boolean lbRetorno = false;
+            try
+            {
+                using (var banco = new Modelo_second())
+                {
+                    UsuarioSet lUsuario = new UsuarioSet();
+                    PerfilSet lPerfil = new PerfilSet();
+
+                    lPerfil.foto = asFoto;
+                    lPerfil.nome = asNome;
+                    
+                    lUsuario.PerfilSet = lPerfil;
+                    lUsuario.nick = asUserId;
+                    lUsuario.uuid = asUUID;
+                    
+                    banco.UsuarioSet.Add(lUsuario);
+                    banco.SaveChanges();
+                    lbRetorno = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+            }
+            return lbRetorno;
+        }
+
+        
+    }
+}
