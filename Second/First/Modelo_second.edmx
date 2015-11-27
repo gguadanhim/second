@@ -8,7 +8,7 @@
   <EntityContainer Name="dbecc20a0950a3450cad9aa555018154efModelStoreContainer">
     <EntitySet Name="PerfilSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsuarioSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_UsuarioPerfil" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.FK_UsuarioPerfil">
+    <AssociationSet Name="PerfilSetUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSetUsuarioSet">
       <End Role="PerfilSet" EntitySet="PerfilSet" />
       <End Role="UsuarioSet" EntitySet="UsuarioSet" />
     </AssociationSet>
@@ -20,6 +20,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="foto" Type="varbinary(max)" Nullable="false" />
     <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UsuarioSet_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioSet">
     <Key>
@@ -30,15 +31,15 @@
     <Property Name="uuid" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Perfil_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK_UsuarioPerfil">
-    <End Role="PerfilSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" Multiplicity="1" />
-    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="*" />
+  <Association Name="PerfilSetUsuarioSet">
+    <End Role="PerfilSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" Multiplicity="*" />
+    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="PerfilSet">
+      <Principal Role="UsuarioSet">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="UsuarioSet">
-        <PropertyRef Name="Perfil_Id" />
+      <Dependent Role="PerfilSet">
+        <PropertyRef Name="UsuarioSet_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -53,7 +54,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="UsuarioSet" Relationship="Self.FK_UsuarioPerfil" FromRole="PerfilSet" ToRole="UsuarioSet" />
+          <NavigationProperty Name="UsuarioSet" Relationship="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" FromRole="PerfilSet" ToRole="UsuarioSet" />
         </EntityType>
         <EntityType Name="UsuarioSet">
           <Key>
@@ -63,34 +64,26 @@
           <Property Name="nick" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="uuid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Perfil_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PerfilSet" Relationship="Self.FK_UsuarioPerfil" FromRole="UsuarioSet" ToRole="PerfilSet" />
+          <NavigationProperty Name="PerfilSet" Relationship="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" FromRole="UsuarioSet" ToRole="PerfilSet" />
         </EntityType>
-        <Association Name="FK_UsuarioPerfil">
-          <End Role="PerfilSet" Type="Self.PerfilSet" Multiplicity="1" />
-          <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PerfilSet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsuarioSet">
-              <PropertyRef Name="Perfil_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="dbecc20a0950a3450cad9aa555018154efEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="modelo_second" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="PerfilSet" EntityType="Self.PerfilSet" />
           <EntitySet Name="UsuarioSet" EntityType="Self.UsuarioSet" />
-          <AssociationSet Name="FK_UsuarioPerfil" Association="Self.FK_UsuarioPerfil">
+          <AssociationSet Name="PerfilSetUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet">
             <End Role="PerfilSet" EntitySet="PerfilSet" />
             <End Role="UsuarioSet" EntitySet="UsuarioSet" />
           </AssociationSet>
         </EntityContainer>
+        <Association Name="PerfilSetUsuarioSet">
+          <End Type="dbecc20a0950a3450cad9aa555018154efModel.PerfilSet" Role="PerfilSet" Multiplicity="1" />
+          <End Type="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Role="UsuarioSet" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="dbecc20a0950a3450cad9aa555018154efModelStoreContainer" CdmEntityContainer="dbecc20a0950a3450cad9aa555018154efEntities">
+  <EntityContainerMapping StorageEntityContainer="dbecc20a0950a3450cad9aa555018154efModelStoreContainer" CdmEntityContainer="modelo_second">
     <EntitySetMapping Name="PerfilSet">
       <EntityTypeMapping TypeName="IsTypeOf(dbecc20a0950a3450cad9aa555018154efModel.PerfilSet)">
         <MappingFragment StoreEntitySet="PerfilSet">
@@ -110,6 +103,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="PerfilSetUsuarioSet" TypeName="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" StoreEntitySet="PerfilSet">
+      <EndProperty Name="UsuarioSet">
+        <ScalarProperty Name="Id" ColumnName="UsuarioSet_Id" />
+      </EndProperty>
+      <EndProperty Name="PerfilSet">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

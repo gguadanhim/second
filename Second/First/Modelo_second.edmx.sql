@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/23/2015 21:08:32
+-- Date Created: 11/25/2015 22:33:44
 -- Generated from EDMX file: D:\Git\second\second\First\Modelo_second.edmx
 -- --------------------------------------------------
 
@@ -40,7 +40,8 @@ GO
 CREATE TABLE [dbo].[PerfilSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [foto] varbinary(max)  NOT NULL,
-    [nome] nvarchar(max)  NOT NULL
+    [nome] nvarchar(max)  NOT NULL,
+    [UsuarioSet_Id] int  NOT NULL
 );
 GO
 
@@ -73,19 +74,19 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Perfil_Id] in table 'UsuarioSet'
-ALTER TABLE [dbo].[UsuarioSet]
-ADD CONSTRAINT [FK_UsuarioPerfil]
-    FOREIGN KEY ([Perfil_Id])
-    REFERENCES [dbo].[PerfilSet]
+-- Creating foreign key on [UsuarioSet_Id] in table 'PerfilSet'
+ALTER TABLE [dbo].[PerfilSet]
+ADD CONSTRAINT [FK_PerfilSetUsuarioSet]
+    FOREIGN KEY ([UsuarioSet_Id])
+    REFERENCES [dbo].[UsuarioSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_UsuarioPerfil'
-CREATE INDEX [IX_FK_UsuarioPerfil]
-ON [dbo].[UsuarioSet]
-    ([Perfil_Id]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_PerfilSetUsuarioSet'
+CREATE INDEX [IX_FK_PerfilSetUsuarioSet]
+ON [dbo].[PerfilSet]
+    ([UsuarioSet_Id]);
 GO
 
 -- --------------------------------------------------

@@ -17,7 +17,7 @@ namespace Second
             Boolean lbRetorno = false;
             try
             {
-                using (var banco = new Modelo_second())
+                using (var banco = new modelo_second())
                 {
                     var listaUsuarios = from p in banco.UsuarioSet
                                         where (p.nick) == (asLogin)
@@ -61,7 +61,7 @@ namespace Second
             Boolean lbRetorno = false;
             try
             {
-                using (var banco = new Modelo_second())
+                using (var banco = new modelo_second())
                 {
                     UsuarioSet lUsuario = new UsuarioSet();
                     PerfilSet lPerfil = new PerfilSet();

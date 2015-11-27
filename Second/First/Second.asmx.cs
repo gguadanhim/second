@@ -41,8 +41,6 @@ namespace Second
             return iControleUsuarios.cadastrarUsuario(asUserId, asUUID, asFoto,asNome);
         }
 
-        
-
         /*[WebMethod]
         public List<Jogador> BuscarJogadores()
         {

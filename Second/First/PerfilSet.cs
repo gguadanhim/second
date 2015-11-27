@@ -14,17 +14,10 @@ namespace Second
     
     public partial class PerfilSet
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PerfilSet()
-        {
-            this.UsuarioSet = new HashSet<UsuarioSet>();
-        }
-    
         public int Id { get; set; }
         public byte[] foto { get; set; }
         public string nome { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsuarioSet> UsuarioSet { get; set; }
+        public virtual UsuarioSet UsuarioSet { get; set; }
     }
 }

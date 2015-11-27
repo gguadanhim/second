@@ -3,7 +3,7 @@
   <EntityContainer Name="dbecc20a0950a3450cad9aa555018154efModelStoreContainer">
     <EntitySet Name="PerfilSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsuarioSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_UsuarioPerfil" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.FK_UsuarioPerfil">
+    <AssociationSet Name="PerfilSetUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSetUsuarioSet">
       <End Role="PerfilSet" EntitySet="PerfilSet" />
       <End Role="UsuarioSet" EntitySet="UsuarioSet" />
     </AssociationSet>
@@ -15,6 +15,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="foto" Type="varbinary(max)" Nullable="false" />
     <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UsuarioSet_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioSet">
     <Key>
@@ -25,15 +26,15 @@
     <Property Name="uuid" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Perfil_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK_UsuarioPerfil">
-    <End Role="PerfilSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" Multiplicity="1" />
-    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="*" />
+  <Association Name="PerfilSetUsuarioSet">
+    <End Role="PerfilSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" Multiplicity="*" />
+    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="PerfilSet">
+      <Principal Role="UsuarioSet">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="UsuarioSet">
-        <PropertyRef Name="Perfil_Id" />
+      <Dependent Role="PerfilSet">
+        <PropertyRef Name="UsuarioSet_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -13,10 +13,10 @@ namespace Second
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Modelo_second : DbContext
+    public partial class modelo_second : DbContext
     {
-        public Modelo_second()
-            : base("name=dbecc20a0950a3450cad9aa555018154efEntities")
+        public modelo_second()
+            : base("name=modelo_second")
         {
         }
     
