@@ -12,6 +12,35 @@ namespace Second
 
         }
 
+        public DadosPerfil buscarDadosPerfil(long alCodigo)
+        {
+            DadosPerfil lDadosPerfil = null;
+
+            try
+            {
+                using (var banco = new modelo_second())
+                {
+                    var listaUsuarios = from p in banco.UsuarioSet
+                                        where (p.Id) == (alCodigo)
+                                        select p;
+
+                    if (listaUsuarios.Count() > 0)
+                    {
+                        lDadosPerfil = new DadosPerfil();
+                        lDadosPerfil.iFoto = listaUsuarios.First().PerfilSet.foto;
+                        lDadosPerfil.isNome = listaUsuarios.First().PerfilSet.nome;
+                        lDadosPerfil.isNick = listaUsuarios.First().nick;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+            }
+
+            return lDadosPerfil;
+        }
+
         public Boolean verificalogin(String asLogin)
         {
             Boolean lbRetorno = false;
@@ -56,9 +85,9 @@ namespace Second
         //    return lListaJogadores;
         //}
 
-        public Boolean cadastrarUsuario(String asUserId,String asUUID,byte[] asFoto, String asNome)
+        public long cadastrarUsuario(String asUserId,String asUUID,byte[] asFoto, String asNome)
         {
-            Boolean lbRetorno = false;
+            long llCodigoUsuario = -1;
             try
             {
                 using (var banco = new modelo_second())
@@ -75,14 +104,14 @@ namespace Second
                     
                     banco.UsuarioSet.Add(lUsuario);
                     banco.SaveChanges();
-                    lbRetorno = true;
+                    llCodigoUsuario = lUsuario.Id;
                 }
             }
             catch (Exception ex)
             {
                 System.Console.WriteLine(ex.Message);
             }
-            return lbRetorno;
+            return llCodigoUsuario;
         }
 
         

@@ -36,11 +36,20 @@ namespace Second
         }
 
         [WebMethod]
-        public Boolean CadastrarUsuario(String asUserId,String asUUID,byte[] asFoto,String asNome)
+        public long CadastrarUsuario(String asUserId,String asUUID,byte[] asFoto,String asNome)
         {
             return iControleUsuarios.cadastrarUsuario(asUserId, asUUID, asFoto,asNome);
         }
 
+        [WebMethod]
+        public DadosPerfil BuscarDadosUsuario(long alUserId)
+        {
+            DadosPerfil ldados = null;
+
+            ldados = iControleUsuarios.buscarDadosPerfil(alUserId);
+
+            return ldados;
+        }
         /*[WebMethod]
         public List<Jogador> BuscarJogadores()
         {
