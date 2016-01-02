@@ -50,17 +50,16 @@ namespace Second
 
             return ldados;
         }
-        /*[WebMethod]
-        public List<Jogador> BuscarJogadores()
-        {
-            return iControleJogadores.getJogadores();
-        }*/
 
-        /*[WebMethod]
-        public List<Campo> BuscarCampos()
+        [WebMethod]
+        public Boolean UpdateDadosUsuario(DadosPerfil adados)
         {
-            return iControleJogadores.getCampos();
-        }*/
+            Boolean lbRetorno = false;
+
+            lbRetorno = iControleUsuarios.updateDadosPerfil(adados);
+
+            return lbRetorno;
+        }
 
         [WebMethod]
         public String teste(String asNome)

@@ -10,5 +10,6 @@ namespace Second
         public byte[] iFoto { get; set; }
         public String isNome { get; set; }
         public String isNick { get; set; }
+        public long ilCodigo { get; set; }
     }
 }

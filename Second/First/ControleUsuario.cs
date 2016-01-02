@@ -66,24 +66,38 @@ namespace Second
             return lbRetorno;
         }
 
-        //public List<Jogador> getJogadores()
-        //{
-        //    List<Jogador> lListaJogadores = new List<Jogador>();
+        public Boolean updateDadosPerfil(DadosPerfil aDadosPerfil)
+        {
+            Boolean lbRetorno = false;
 
-        //    using (var banco = new Modelo_dadosContainer())
-        //    {
+            try
+            {
+                using (var banco = new modelo_second())
+                {
+                    var listaUsuarios = from p in banco.UsuarioSet
+                                        where (p.Id) == (aDadosPerfil.ilCodigo)
+                                        select p;
 
-        //        var listaJogadores = from p in banco.JogadorSet
-        //                             select p;
+                    if (listaUsuarios.Count() > 0)
+                    {
+                        if (aDadosPerfil.iFoto != null)
+                        {
+                            listaUsuarios.First().PerfilSet.foto = aDadosPerfil.iFoto;
+                        }
+                        listaUsuarios.First().PerfilSet.nome = aDadosPerfil.isNome;
+                        
+                        banco.SaveChanges();
+                        lbRetorno = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+            }
 
-        //        foreach (Jogador item in listaJogadores)
-        //        {
-        //            lListaJogadores.Add(item);
-        //        }
-        //    }
-
-        //    return lListaJogadores;
-        //}
+            return lbRetorno;
+        }
 
         public long cadastrarUsuario(String asUserId,String asUUID,byte[] asFoto, String asNome)
         {
@@ -113,7 +127,5 @@ namespace Second
             }
             return llCodigoUsuario;
         }
-
-        
     }
 }
