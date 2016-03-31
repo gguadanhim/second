@@ -26,8 +26,8 @@ namespace Second
             return this.getLista();
         }
 
-        public Boolean atualizaStatusUsuario(int aiCodigo,int aiStatus){
-            Boolean lbRetorno = false;
+        public int atualizaStatusUsuario(int aiCodigo,int aiStatus){
+            int liRetorno = 0;
             DadosUsuario ldados;
             IEnumerable<DadosUsuario> lResult;
             try
@@ -45,15 +45,18 @@ namespace Second
                     ldados = lResult.First();
                 }
 
-                ldados.iiStatus = aiStatus;
+                if (ldados.iiStatus != DadosPartida.STATUS_PARTIDA_AGUARDANDO)
+                {
+                    ldados.iiStatus = aiStatus;
+                }
 
-                lbRetorno = true;
+                liRetorno = ldados.iiStatus;
             }
             catch (Exception ex)
             {
-                lbRetorno = false;
+                liRetorno = -1;
             }
-            return lbRetorno;
+            return liRetorno;
         }
 
         public DadosUsuario getDadosUsuario(int aiCodigo)

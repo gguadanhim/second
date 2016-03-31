@@ -71,13 +71,13 @@ namespace Second
         }
 
         [WebMethod]
-        public Boolean SetStatusUsuario(int aiUsuario,int aiStatus)
+        public int AtualizaStatusUsuario(int aiUsuario,int aiStatus)
         {
-            Boolean lbRetorno = false;
+            int liRetorno = 0;
 
-            lbRetorno = controlePartidas.atualizaStatusUsuario(aiUsuario, aiStatus);
+            liRetorno = controlePartidas.atualizaStatusUsuario(aiUsuario, aiStatus);
 
-            return lbRetorno;
+            return liRetorno;
         }
 
         [WebMethod]
@@ -155,7 +155,7 @@ namespace Second
         }
 
         [WebMethod]
-        public int AguardarJogador(int aiJogador)
+        public int AguardarJogada(int aiJogador)
         {
             int liRetorno = 0;
             int liContador = 0;
