@@ -99,8 +99,10 @@ namespace Second
             if (aUsuario2.getRespostaUsuario() == DadosPartida.STATUS_PARTIDA_ACEITA)
             {
                 lbRetorno = true;
+                aUsuario1.ibJogadorPrincipal = true;
                 aUsuario1.iiStatus = DadosUsuario.STATUS_JOGANDO;
                 aUsuario2.iiStatus = DadosUsuario.STATUS_JOGANDO;
+                lDadosPartida.iTabuleiro = new DadosTabuleiro();
             }
 
             return lbRetorno;
@@ -122,6 +124,7 @@ namespace Second
                 }
                 else
                 {
+                    ldados.ibJogadorPrincipal = false;
                     ldados.iDadosPartida.StatusPartida = DadosPartida.STATUS_PARTIDA_INICIADA;
                 }
                 

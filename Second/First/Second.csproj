@@ -92,6 +92,8 @@
     <Compile Include="ControleUsuario.cs" />
     <Compile Include="DadosPartida.cs" />
     <Compile Include="DadosPerfil.cs" />
+    <Compile Include="DadosTabuleiro.cs" />
+    <Compile Include="DadosUltimaJogada.cs" />
     <Compile Include="DadosUsuario.cs" />
     <Compile Include="Modelo_second.Context.cs">
       <AutoGen>True</AutoGen>

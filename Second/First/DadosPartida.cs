@@ -7,6 +7,11 @@ namespace Second
 {
     public class DadosPartida
     {
+        public DadosPartida()
+        {
+            iDadosUltimaJogada = new DadosUltimaJogada();
+        }
+       
         public const int STATUS_PARTIDA_INICIANDO = 1;
         public const int STATUS_PARTIDA_INICIADA = 2;
         public const int STATUS_PARTIDA_FINALIZADA = 3;
@@ -17,5 +22,7 @@ namespace Second
         public int StatusPartida { get; set; }
         public DadosUsuario lUsuario1 { get; set; }
         public DadosUsuario lUsuario2 { get; set; }
+        public DadosTabuleiro iTabuleiro{ get; set; }
+        public DadosUltimaJogada iDadosUltimaJogada { get; set; }
     }
 }

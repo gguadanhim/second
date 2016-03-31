@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Services;
 
@@ -127,6 +128,76 @@ namespace Second
             lbRetorno = controlePartidas.setStatusPedidoJogo(aiUsuario, aiStatus);
 
             return lbRetorno;
+        }
+
+        [WebMethod]
+        public int SetItemSelecionadoJogador(int aiPosicao, int aiJogador)
+        {
+            int liRetorno = 0;
+            DadosUsuario lDadosUsuario;
+            
+            lDadosUsuario = controlePartidas.getDadosUsuario(aiJogador);
+
+            lDadosUsuario.setItemSelecionado(aiPosicao);
+
+
+            liRetorno = lDadosUsuario.VerificaVitoria();
+
+            if (liRetorno == 1)
+            {
+                lDadosUsuario.iDadosPartida.StatusPartida = DadosPartida.STATUS_PARTIDA_FINALIZADA;
+            }
+
+            lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador = aiJogador;
+            lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado = aiPosicao;
+            
+            return liRetorno;
+        }
+
+        [WebMethod]
+        public int AguardarJogador(int aiJogador)
+        {
+            int liRetorno = 0;
+            int liContador = 0;
+            Boolean lbParar = false;
+            DadosUsuario lDadosUsuario;
+            
+            lDadosUsuario = controlePartidas.getDadosUsuario(aiJogador);
+
+            while (true)
+	        {
+                if (lDadosUsuario.iDadosPartida.StatusPartida == DadosPartida.STATUS_PARTIDA_FINALIZADA)
+                {
+                    liRetorno = 10;
+                    lbParar = true;
+                }
+                else
+                {
+                    if (lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador == aiJogador)
+                    {
+                        liContador++;
+                        Thread.Sleep(1000);
+                        if (liContador == 15)
+                        {
+                            liRetorno = 11;
+                            lbParar = true;
+                        }
+                    }
+                    else
+                    {
+                        liRetorno = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado;
+                        lbParar = true;
+                    }
+                }
+
+                if (lbParar)
+                {
+                    break;
+                }
+ 
+	        }
+            
+            return liRetorno;
         }
 
         [WebMethod]
