@@ -26,7 +26,7 @@ namespace Second
             return this.getLista();
         }
 
-        public int atualizaStatusUsuario(int aiCodigo,int aiStatus){
+        public int atualizaStatusUsuario(long aiCodigo,int aiStatus){
             int liRetorno = 0;
             DadosUsuario ldados;
             IEnumerable<DadosUsuario> lResult;
@@ -59,7 +59,7 @@ namespace Second
             return liRetorno;
         }
 
-        public DadosUsuario getDadosUsuario(int aiCodigo)
+        public DadosUsuario getDadosUsuario(long aiCodigo)
         {
             DadosUsuario ldados;
 
@@ -68,7 +68,7 @@ namespace Second
             return ldados;
         }
 
-        public DadosUsuario buscaUsuarioOnline(int aiUsuarioAtual)
+        public DadosUsuario buscaUsuarioOnline(long aiUsuarioAtual)
         {
             DadosUsuario ldados = null;
             IEnumerable<DadosUsuario> lResult;
@@ -111,7 +111,7 @@ namespace Second
             return lbRetorno;
         }
 
-        public Boolean setStatusPedidoJogo(int aiUsuario, int aiStatus)
+        public Boolean setStatusPedidoJogo(long aiUsuario, int aiStatus)
         {
             DadosUsuario ldados = null;
             Boolean lbRetorno = false;

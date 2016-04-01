@@ -27,12 +27,6 @@ namespace Second
         }
 
         [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
-
-        [WebMethod]
         public Boolean VerificarUsuario(String asNome)
         {
             return iControleUsuarios.verificalogin(asNome);
@@ -53,7 +47,7 @@ namespace Second
 
             return ldados;
         }
-
+        
         [WebMethod]
         public Boolean UpdateDadosUsuario(DadosPerfil adados)
         {
@@ -63,7 +57,7 @@ namespace Second
 
             return lbRetorno;
         }
-
+        
         [WebMethod]
         public List<DadosUsuario> BuscarDadosUsuarios()
         {
@@ -71,19 +65,19 @@ namespace Second
         }
 
         [WebMethod]
-        public int AtualizaStatusUsuario(int aiUsuario,int aiStatus)
+        public DadosRetorno AtualizaStatusUsuario(long aiUsuario, int aiStatus)
         {
-            int liRetorno = 0;
+            DadosRetorno lDadosRetorno = new DadosRetorno();
+            
+            lDadosRetorno.liCodigo = controlePartidas.atualizaStatusUsuario(aiUsuario, aiStatus);
 
-            liRetorno = controlePartidas.atualizaStatusUsuario(aiUsuario, aiStatus);
-
-            return liRetorno;
+            return lDadosRetorno;
         }
-
+        
         [WebMethod]
-        public Boolean BuscarPlayerPartida(int aiUsuario)
+        public DadosRetorno BuscarPlayerPartida(long aiUsuario)
         {
-            Boolean lbRetorno = false;
+            DadosRetorno ldadoRetorno = new DadosRetorno();
             DadosUsuario lUsuario1;
             DadosUsuario lUsuario2;
             int liContador = 0;
@@ -98,7 +92,7 @@ namespace Second
                 {
                     if (controlePartidas.criarPartida(lUsuario1, lUsuario2))
                     {
-                        lbRetorno = true;
+                        ldadoRetorno.liCodigo = 1;
                         break;
                     }
                     else
@@ -116,24 +110,27 @@ namespace Second
                     break;
                 }
             }
-            
-            return lbRetorno;
+
+            return ldadoRetorno;
         }
 
         [WebMethod]
-        public Boolean SetStatusPedidoJogo(int aiUsuario, int aiStatus)
+        public DadosRetorno SetStatusPedidoJogo(long aiUsuario, int aiStatus)
         {
-            Boolean lbRetorno = false;
+            DadosRetorno ldadoRetorno = new DadosRetorno();
 
-            lbRetorno = controlePartidas.setStatusPedidoJogo(aiUsuario, aiStatus);
+            if (controlePartidas.setStatusPedidoJogo(aiUsuario, aiStatus))
+            {
+                ldadoRetorno.liCodigo = 1;
+            }
 
-            return lbRetorno;
+            return ldadoRetorno;
         }
 
         [WebMethod]
-        public int SetItemSelecionadoJogador(int aiPosicao, int aiJogador)
+        public DadosRetorno SetItemSelecionadoJogador(int aiPosicao, long aiJogador)
         {
-            int liRetorno = 0;
+            DadosRetorno ldadoRetorno = new DadosRetorno();
             DadosUsuario lDadosUsuario;
             
             lDadosUsuario = controlePartidas.getDadosUsuario(aiJogador);
@@ -141,24 +138,24 @@ namespace Second
             lDadosUsuario.setItemSelecionado(aiPosicao);
 
 
-            liRetorno = lDadosUsuario.VerificaVitoria();
+            ldadoRetorno.liCodigo = lDadosUsuario.VerificaVitoria();
 
-            if (liRetorno == 1)
+            if (ldadoRetorno.liCodigo == 1)
             {
                 lDadosUsuario.iDadosPartida.StatusPartida = DadosPartida.STATUS_PARTIDA_FINALIZADA;
             }
 
             lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador = aiJogador;
             lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado = aiPosicao;
-            
-            return liRetorno;
+
+            return ldadoRetorno;
         }
 
         [WebMethod]
-        public int AguardarJogada(int aiJogador)
+        public DadosRetorno AguardarJogada(long aiJogador)
         {
-            int liRetorno = 0;
             int liContador = 0;
+            DadosRetorno ldadoRetorno = new DadosRetorno();
             Boolean lbParar = false;
             DadosUsuario lDadosUsuario;
             
@@ -168,7 +165,7 @@ namespace Second
 	        {
                 if (lDadosUsuario.iDadosPartida.StatusPartida == DadosPartida.STATUS_PARTIDA_FINALIZADA)
                 {
-                    liRetorno = 10;
+                    ldadoRetorno.liCodigo = 10;
                     lbParar = true;
                 }
                 else
@@ -179,13 +176,13 @@ namespace Second
                         Thread.Sleep(1000);
                         if (liContador == 15)
                         {
-                            liRetorno = 11;
+                            ldadoRetorno.liCodigo = 11;
                             lbParar = true;
                         }
                     }
                     else
                     {
-                        liRetorno = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado;
+                        ldadoRetorno.liCodigo = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado;
                         lbParar = true;
                     }
                 }
@@ -194,16 +191,9 @@ namespace Second
                 {
                     break;
                 }
- 
 	        }
-            
-            return liRetorno;
-        }
 
-        [WebMethod]
-        public String teste(String asNome)
-        {
-            return "Teste "+asNome;
+            return ldadoRetorno;
         }
     }
 }

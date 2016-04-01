@@ -7,7 +7,7 @@ namespace Second
 {
     public class DadosUltimaJogada
     {
-        public int ilJogador { get; set; }
+        public long ilJogador { get; set; }
         public int ilSequencialJogado { get; set; }
     }
 }

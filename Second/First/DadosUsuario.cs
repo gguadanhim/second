@@ -13,7 +13,7 @@ namespace Second
         public const int STATUS_ONLINE = 1;
         public const int STATUS_JOGANDO = 2;
         
-        public int iiCodigo { get; set; }
+        public long iiCodigo { get; set; }
         public int iiStatus { get; set; }
         public List<int> iListaSelecaoJogador = new List<int>();
         public DadosPartida iDadosPartida { get; set; }

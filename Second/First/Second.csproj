@@ -92,6 +92,7 @@
     <Compile Include="ControleUsuario.cs" />
     <Compile Include="DadosPartida.cs" />
     <Compile Include="DadosPerfil.cs" />
+    <Compile Include="DadosRetorno.cs" />
     <Compile Include="DadosTabuleiro.cs" />
     <Compile Include="DadosUltimaJogada.cs" />
     <Compile Include="DadosUsuario.cs" />
