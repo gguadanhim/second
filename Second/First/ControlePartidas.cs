@@ -88,7 +88,6 @@ namespace Second
             DadosPartida lDadosPartida = new DadosPartida();
 
             lDadosPartida.StatusPartida = DadosPartida.STATUS_PARTIDA_INICIANDO;
-            aUsuario1.iiStatus = DadosPartida.STATUS_PARTIDA_AGUARDANDO;
             aUsuario2.iiStatus = DadosPartida.STATUS_PARTIDA_AGUARDANDO;
             
             lDadosPartida.lUsuario1 = aUsuario1;
