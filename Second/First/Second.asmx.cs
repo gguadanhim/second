@@ -172,17 +172,19 @@ namespace Second
                 {
                     if (lDadosUsuario.iDadosPartida.StatusPartida == DadosPartida.STATUS_PARTIDA_FINALIZADA)
                     {
+                        lDadosUsuario.iDadosPartida = null;
                         ldadoRetorno.liCodigo = 10;
                         lbParar = true;
                     }
                     else
                     {
-                        if ((lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador == aiJogador || lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador == 0))
+                        if ((lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador == aiJogador) || (lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador == 0))
                         {
                             liContador++;
                             Thread.Sleep(1000);
                             if (liContador == 15)
                             {
+                                lDadosUsuario.iDadosPartida = null;
                                 ldadoRetorno.liCodigo = 11;
                                 lbParar = true;
                             }
