@@ -172,7 +172,10 @@ namespace Second
                 {
                     if (lDadosUsuario.iDadosPartida.StatusPartida == DadosPartida.STATUS_PARTIDA_FINALIZADA)
                     {
+                        lDadosUsuario.iDadosPartida.lUsuario1 = null;
+                        lDadosUsuario.iDadosPartida.lUsuario2 = null;
                         lDadosUsuario.iDadosPartida = null;
+
                         ldadoRetorno.liCodigo = 10;
                         lbParar = true;
                     }
@@ -184,7 +187,10 @@ namespace Second
                             Thread.Sleep(1000);
                             if (liContador == 15)
                             {
+                                lDadosUsuario.iDadosPartida.lUsuario1 = null;
+                                lDadosUsuario.iDadosPartida.lUsuario2 = null;
                                 lDadosUsuario.iDadosPartida = null;
+                                
                                 ldadoRetorno.liCodigo = 11;
                                 lbParar = true;
                             }
