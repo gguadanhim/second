@@ -163,33 +163,41 @@ namespace Second
 
             while (true)
 	        {
-                if (lDadosUsuario.iDadosPartida.StatusPartida == DadosPartida.STATUS_PARTIDA_FINALIZADA)
+                if ((lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador == 0) && (lDadosUsuario.ibJogadorPrincipal))
                 {
-                    ldadoRetorno.liCodigo = 10;
+                    ldadoRetorno.liCodigo = 12;
                     lbParar = true;
                 }
                 else
                 {
-                    if (lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador == aiJogador)
+                    if (lDadosUsuario.iDadosPartida.StatusPartida == DadosPartida.STATUS_PARTIDA_FINALIZADA)
                     {
-                        liContador++;
-                        Thread.Sleep(1000);
-                        if (liContador == 15)
-                        {
-                            ldadoRetorno.liCodigo = 11;
-                            lbParar = true;
-                        }
+                        ldadoRetorno.liCodigo = 10;
+                        lbParar = true;
                     }
                     else
                     {
-                        ldadoRetorno.liCodigo = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado;
-                        lbParar = true;
+                        if ((lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador == aiJogador || lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador == 0))
+                        {
+                            liContador++;
+                            Thread.Sleep(1000);
+                            if (liContador == 15)
+                            {
+                                ldadoRetorno.liCodigo = 11;
+                                lbParar = true;
+                            }
+                        }
+                        else
+                        {
+                            ldadoRetorno.liCodigo = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado;
+                            lbParar = true;
+                        }
                     }
-                }
 
-                if (lbParar)
-                {
-                    break;
+                    if (lbParar)
+                    {
+                        break;
+                    }
                 }
 	        }
 
