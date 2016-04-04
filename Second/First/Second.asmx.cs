@@ -221,9 +221,13 @@ namespace Second
             DadosPartida ll = null;
             ll = aUsuario.iDadosPartida;
 
+            aUsuario.iDadosPartida.lUsuario2.iListaSelecaoJogador.Clear();
+            aUsuario.iListaSelecaoJogador.Clear();
+
             controlePartidas.getListaPartidas().TryTake(out ll);
             controlePartidas.getListaPartidas().TryPeek(out ll);
             aUsuario.iDadosPartida = null;
+            
         }
     }
 }
