@@ -27,6 +27,15 @@ namespace Second
         }
 
         [WebMethod]
+        public DadosRetorno contaPartidas()
+        {
+            DadosRetorno lDadosRetorno = new DadosRetorno();
+
+            lDadosRetorno.liCodigo = controlePartidas.getListaPartidas().Count;
+
+            return lDadosRetorno;
+        }
+        [WebMethod]
         public Boolean VerificarUsuario(String asNome)
         {
             return iControleUsuarios.verificalogin(asNome);
@@ -172,9 +181,7 @@ namespace Second
                 {
                     if (lDadosUsuario.iDadosPartida.StatusPartida == DadosPartida.STATUS_PARTIDA_FINALIZADA)
                     {
-                        lDadosUsuario.iDadosPartida.lUsuario1 = null;
-                        lDadosUsuario.iDadosPartida.lUsuario2 = null;
-                        lDadosUsuario.iDadosPartida = null;
+                        RemovePartida(lDadosUsuario);
 
                         ldadoRetorno.liCodigo = 10;
                         lbParar = true;
@@ -187,10 +194,7 @@ namespace Second
                             Thread.Sleep(1000);
                             if (liContador == 15)
                             {
-                                lDadosUsuario.iDadosPartida.lUsuario1 = null;
-                                lDadosUsuario.iDadosPartida.lUsuario2 = null;
-                                lDadosUsuario.iDadosPartida = null;
-                                
+                                RemovePartida(lDadosUsuario);
                                 ldadoRetorno.liCodigo = 11;
                                 lbParar = true;
                             }
@@ -210,6 +214,16 @@ namespace Second
 	        }
 
             return ldadoRetorno;
+        }
+
+        private void RemovePartida(DadosUsuario aUsuario)
+        {
+            DadosPartida ll = null;
+            ll = aUsuario.iDadosPartida;
+
+            controlePartidas.getListaPartidas().TryTake(out ll);
+            controlePartidas.getListaPartidas().TryPeek(out ll);
+            aUsuario.iDadosPartida = null;
         }
     }
 }
