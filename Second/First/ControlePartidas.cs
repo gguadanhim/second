@@ -106,6 +106,10 @@ namespace Second
                 aUsuario2.iiStatus = DadosUsuario.STATUS_JOGANDO;
                 lDadosPartida.iTabuleiro = new DadosTabuleiro();
             }
+            else
+            {
+                aUsuario2.iiStatus = DadosUsuario.STATUS_ONLINE;
+            }
 
             return lbRetorno;
         }
