@@ -19,10 +19,90 @@ namespace Second
         public const int STATUS_PARTIDA_RECUSADA = 5;
         public const int STATUS_PARTIDA_AGUARDANDO = 6;
 
+        public const int VITORIA = 1;
+        public const int DERROTA = 2;
+        public const int DESISTENCIA = 3;
+
         public int StatusPartida { get; set; }
         public DadosUsuario lUsuario1 { get; set; }
         public DadosUsuario lUsuario2 { get; set; }
         public DadosTabuleiro iTabuleiro{ get; set; }
         public DadosUltimaJogada iDadosUltimaJogada { get; set; }
+
+
+        public DadosRetorno VerificaResultado(DadosUsuario aDadosUsuarioVitoria, Boolean abVitoriaPorAbandono)
+        {
+            DadosRetorno lDados = new DadosRetorno();
+            long llCodigoUsuarioDerrota = 0;
+            
+            this.adicionarResultado(aDadosUsuarioVitoria.iiCodigo, VITORIA);
+
+            if (aDadosUsuarioVitoria.ibJogadorPrincipal)
+            {
+                llCodigoUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario2.iiCodigo;
+            }
+            else
+            {
+                llCodigoUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario1.iiCodigo;
+            }
+
+            if (abVitoriaPorAbandono)
+            {
+                this.adicionarResultado(llCodigoUsuarioDerrota, DESISTENCIA);
+            }
+            else
+            {
+                this.adicionarResultado(llCodigoUsuarioDerrota, DERROTA);
+            }
+
+            return lDados;
+        }
+        private DadosRetorno adicionarResultado(long aiCodigoUsuario, int aiTipo)
+        {
+            DadosRetorno lDados = new DadosRetorno();
+            resultados_usuario lResultado = null;
+            try
+            {
+                using (var banco = new modelo_second())
+                {
+                    var resultadosUsuario = from p in banco.resultados_usuarioSet
+                                        where (p.UsuarioSet.Id) == (aiCodigoUsuario)
+                                        select p;
+
+                    if (resultadosUsuario.Count() > 0)
+                    {
+                        lResultado = resultadosUsuario.First();
+                    }
+                    else
+                    {
+                        lResultado = new resultados_usuario();
+                        banco.resultados_usuarioSet.Add(lResultado);
+                    }
+
+                    switch (aiTipo)
+                    {
+                        case VITORIA:
+                            lResultado.vitorias++;
+                            break;
+                        case DERROTA:
+                            lResultado.derrotas++;
+                            break;
+                        case DESISTENCIA:
+                            lResultado.desistencias++;
+                            break;
+                    }
+
+                    banco.SaveChanges();
+                    lDados.liCodigo = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                lDados.lsMensagem = ex.Message;
+                System.Console.WriteLine(ex.Message);
+            }
+
+            return lDados;
+        }
     }
 }

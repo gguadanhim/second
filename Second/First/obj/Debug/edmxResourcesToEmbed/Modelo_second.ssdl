@@ -3,8 +3,13 @@
   <EntityContainer Name="dbecc20a0950a3450cad9aa555018154efModelStoreContainer">
     <EntitySet Name="PerfilSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsuarioSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="resultados_usuarioSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.resultados_usuarioSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="PerfilSetUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSetUsuarioSet">
       <End Role="PerfilSet" EntitySet="PerfilSet" />
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+    </AssociationSet>
+    <AssociationSet Name="resultados_usuarioUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.resultados_usuarioUsuarioSet">
+      <End Role="resultados_usuario" EntitySet="resultados_usuarioSet" />
       <End Role="UsuarioSet" EntitySet="UsuarioSet" />
     </AssociationSet>
   </EntityContainer>
@@ -26,6 +31,16 @@
     <Property Name="uuid" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Perfil_Id" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="resultados_usuarioSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="vitorias" Type="int" Nullable="false" />
+    <Property Name="derrotas" Type="int" Nullable="false" />
+    <Property Name="desistencias" Type="int" Nullable="false" />
+    <Property Name="UsuarioSet_Id" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="PerfilSetUsuarioSet">
     <End Role="PerfilSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" Multiplicity="*" />
     <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
@@ -34,6 +49,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="PerfilSet">
+        <PropertyRef Name="UsuarioSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="resultados_usuarioUsuarioSet">
+    <End Role="resultados_usuario" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.resultados_usuarioSet" Multiplicity="*" />
+    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UsuarioSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="resultados_usuario">
         <PropertyRef Name="UsuarioSet_Id" />
       </Dependent>
     </ReferentialConstraint>

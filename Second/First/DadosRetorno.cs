@@ -8,5 +8,6 @@ namespace Second
     public class DadosRetorno
     {
         public int liCodigo;
+        public String lsMensagem;
     }
 }

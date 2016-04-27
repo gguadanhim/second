@@ -12,14 +12,13 @@ namespace Second
     using System;
     using System.Collections.Generic;
     
-    public partial class UsuarioSet
+    public partial class resultados_usuario
     {
         public int Id { get; set; }
-        public string nick { get; set; }
-        public string uuid { get; set; }
-        public int Perfil_Id { get; set; }
+        public int vitorias { get; set; }
+        public int derrotas { get; set; }
+        public int desistencias { get; set; }
     
-        public virtual PerfilSet PerfilSet { get; set; }
-        public virtual resultados_usuario resultados_usuario { get; set; }
+        public virtual UsuarioSet UsuarioSet { get; set; }
     }
 }

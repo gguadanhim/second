@@ -146,11 +146,12 @@ namespace Second
 
             lDadosUsuario.setItemSelecionado(aiPosicao);
 
-
             ldadoRetorno.liCodigo = lDadosUsuario.VerificaVitoria();
 
             if (ldadoRetorno.liCodigo == 1)
             {
+                lDadosUsuario.iDadosPartida.VerificaResultado(lDadosUsuario, false);
+
                 lDadosUsuario.iDadosPartida.StatusPartida = DadosPartida.STATUS_PARTIDA_FINALIZADA;
             }
 
@@ -194,6 +195,7 @@ namespace Second
                             Thread.Sleep(1000);
                             if (liContador == 15)
                             {
+                                lDadosUsuario.iDadosPartida.VerificaResultado(lDadosUsuario, true);
                                 RemovePartida(lDadosUsuario);
                                 ldadoRetorno.liCodigo = 11;
                                 lbParar = true;

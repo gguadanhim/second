@@ -114,6 +114,9 @@
     <Compile Include="PerfilSet.cs">
       <DependentUpon>Modelo_second.tt</DependentUpon>
     </Compile>
+    <Compile Include="resultados_usuario.cs">
+      <DependentUpon>Modelo_second.tt</DependentUpon>
+    </Compile>
     <Compile Include="Second.asmx.cs">
       <DependentUpon>Second.asmx</DependentUpon>
       <SubType>Component</SubType>

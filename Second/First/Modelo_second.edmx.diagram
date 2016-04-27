@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.PerfilSet" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" />
+        <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuario" Width="2.5" PointX="5.375" PointY="1.125" />
+        <AssociationConnector Association="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuarioUsuarioSet" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

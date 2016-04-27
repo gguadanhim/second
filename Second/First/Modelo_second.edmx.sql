@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/25/2015 22:33:44
+-- Date Created: 04/26/2016 21:02:05
 -- Generated from EDMX file: D:\Git\second\second\First\Modelo_second.edmx
 -- --------------------------------------------------
 
@@ -17,8 +17,8 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_UsuarioPerfil]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UsuarioSet] DROP CONSTRAINT [FK_UsuarioPerfil];
+IF OBJECT_ID(N'[dbo].[FK_PerfilSetUsuarioSet]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PerfilSet] DROP CONSTRAINT [FK_PerfilSetUsuarioSet];
 GO
 
 -- --------------------------------------------------
@@ -54,6 +54,16 @@ CREATE TABLE [dbo].[UsuarioSet] (
 );
 GO
 
+-- Creating table 'resultados_usuarioSet'
+CREATE TABLE [dbo].[resultados_usuarioSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [vitorias] int  NOT NULL,
+    [derrotas] int  NOT NULL,
+    [desistencias] int  NOT NULL,
+    [UsuarioSet_Id] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -67,6 +77,12 @@ GO
 -- Creating primary key on [Id] in table 'UsuarioSet'
 ALTER TABLE [dbo].[UsuarioSet]
 ADD CONSTRAINT [PK_UsuarioSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'resultados_usuarioSet'
+ALTER TABLE [dbo].[resultados_usuarioSet]
+ADD CONSTRAINT [PK_resultados_usuarioSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -86,6 +102,21 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_PerfilSetUsuarioSet'
 CREATE INDEX [IX_FK_PerfilSetUsuarioSet]
 ON [dbo].[PerfilSet]
+    ([UsuarioSet_Id]);
+GO
+
+-- Creating foreign key on [UsuarioSet_Id] in table 'resultados_usuarioSet'
+ALTER TABLE [dbo].[resultados_usuarioSet]
+ADD CONSTRAINT [FK_resultados_usuarioUsuarioSet]
+    FOREIGN KEY ([UsuarioSet_Id])
+    REFERENCES [dbo].[UsuarioSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_resultados_usuarioUsuarioSet'
+CREATE INDEX [IX_FK_resultados_usuarioUsuarioSet]
+ON [dbo].[resultados_usuarioSet]
     ([UsuarioSet_Id]);
 GO
 

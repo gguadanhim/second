@@ -18,6 +18,7 @@
     <Property Name="uuid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Perfil_Id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="PerfilSet" Relationship="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" FromRole="UsuarioSet" ToRole="PerfilSet" />
+    <NavigationProperty Name="resultados_usuario" Relationship="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuarioUsuarioSet" FromRole="UsuarioSet" ToRole="resultados_usuario" />
   </EntityType>
   <EntityContainer Name="modelo_second" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="PerfilSet" EntityType="Self.PerfilSet" />
@@ -26,9 +27,28 @@
       <End Role="PerfilSet" EntitySet="PerfilSet" />
       <End Role="UsuarioSet" EntitySet="UsuarioSet" />
     </AssociationSet>
+    <EntitySet Name="resultados_usuarioSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuario" />
+    <AssociationSet Name="resultados_usuarioUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuarioUsuarioSet">
+      <End Role="resultados_usuario" EntitySet="resultados_usuarioSet" />
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+    </AssociationSet>
   </EntityContainer>
   <Association Name="PerfilSetUsuarioSet">
     <End Type="dbecc20a0950a3450cad9aa555018154efModel.PerfilSet" Role="PerfilSet" Multiplicity="1" />
+    <End Type="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Role="UsuarioSet" Multiplicity="1" />
+  </Association>
+  <EntityType Name="resultados_usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vitorias" Type="Int32" Nullable="false" />
+    <Property Name="derrotas" Type="Int32" Nullable="false" />
+    <Property Name="desistencias" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UsuarioSet" Relationship="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuarioUsuarioSet" FromRole="resultados_usuario" ToRole="UsuarioSet" />
+  </EntityType>
+  <Association Name="resultados_usuarioUsuarioSet">
+    <End Type="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuario" Role="resultados_usuario" Multiplicity="1" />
     <End Type="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Role="UsuarioSet" Multiplicity="1" />
   </Association>
 </Schema>
