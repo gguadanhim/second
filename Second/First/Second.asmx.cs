@@ -39,8 +39,12 @@ namespace Second
         [WebMethod]
         public DadosRetorno teste()
         {
+            DadosUsuario lDadosUsuario;
             DadosPartida ll = new DadosPartida();
-            ll.adicionarResultado(2,1);
+
+            lDadosUsuario = controlePartidas.getDadosUsuario(1);
+
+            lDadosUsuario.iDadosPartida.VerificaResultado(lDadosUsuario, false);
             DadosRetorno lDadosRetorno = new DadosRetorno();
 
             return lDadosRetorno;
@@ -204,7 +208,7 @@ namespace Second
                         {
                             liContador++;
                             Thread.Sleep(1000);
-                            if (liContador == 15)
+                            if (liContador == 150)
                             {
                                 lDadosUsuario.iDadosPartida.VerificaResultado(lDadosUsuario, true);
                                 RemovePartida(lDadosUsuario);

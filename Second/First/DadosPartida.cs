@@ -42,7 +42,7 @@ namespace Second
                     long llCodigoUsuarioDerrota = 0;
 
                     this.adicionarResultado(aDadosUsuarioVitoria.iiCodigo, VITORIA);
-
+                    System.Console.WriteLine("GABRIELGENEROSO");
                     if (aDadosUsuarioVitoria.ibJogadorPrincipal)
                     {
                         llCodigoUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario2.iiCodigo;
@@ -81,10 +81,6 @@ namespace Second
                                         where (p.UsuarioSet.Id) == (aiCodigoUsuario)
                                         select p;
 
-                    var dadosUsuario = from p in banco.UsuarioSet
-                                            where (p.Id) == (aiCodigoUsuario)
-                                            select p;
-
                     if (resultadosUsuario.Count() > 0)
                     {
                         lResultado = resultadosUsuario.First();
@@ -92,6 +88,11 @@ namespace Second
                     else
                     {
                         lResultado = new resultados_usuario();
+
+                        var dadosUsuario = from p in banco.UsuarioSet
+                                           where (p.Id) == (aiCodigoUsuario)
+                                           select p;
+
                         lResultado.UsuarioSet = dadosUsuario.First();
                         banco.resultados_usuarioSet.Add(lResultado);
                     }
