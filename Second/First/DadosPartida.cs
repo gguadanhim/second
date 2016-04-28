@@ -57,6 +57,7 @@ namespace Second
 
             return lDados;
         }
+
         private DadosRetorno adicionarResultado(long aiCodigoUsuario, int aiTipo)
         {
             DadosRetorno lDados = new DadosRetorno();
@@ -69,6 +70,10 @@ namespace Second
                                         where (p.UsuarioSet.Id) == (aiCodigoUsuario)
                                         select p;
 
+                    var dadosUsuario = from p in banco.UsuarioSet
+                                            where (p.Id) == (aiCodigoUsuario)
+                                            select p;
+
                     if (resultadosUsuario.Count() > 0)
                     {
                         lResultado = resultadosUsuario.First();
@@ -76,6 +81,7 @@ namespace Second
                     else
                     {
                         lResultado = new resultados_usuario();
+                        lResultado.UsuarioSet = dadosUsuario.First();
                         banco.resultados_usuarioSet.Add(lResultado);
                     }
 
