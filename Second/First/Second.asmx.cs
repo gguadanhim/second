@@ -40,7 +40,7 @@ namespace Second
         public DadosRetorno teste()
         {
             DadosPartida ll = new DadosPartida();
-            ll.adicionarResultado(7,1);
+            ll.adicionarResultado(2,1);
             DadosRetorno lDadosRetorno = new DadosRetorno();
 
             return lDadosRetorno;

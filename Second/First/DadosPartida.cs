@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace Second
@@ -28,33 +29,43 @@ namespace Second
         public DadosUsuario lUsuario2 { get; set; }
         public DadosTabuleiro iTabuleiro{ get; set; }
         public DadosUltimaJogada iDadosUltimaJogada { get; set; }
-
+        private Object outputLock = new Object();
 
         public DadosRetorno VerificaResultado(DadosUsuario aDadosUsuarioVitoria, Boolean abVitoriaPorAbandono)
         {
             DadosRetorno lDados = new DadosRetorno();
-            long llCodigoUsuarioDerrota = 0;
-            
-            this.adicionarResultado(aDadosUsuarioVitoria.iiCodigo, VITORIA);
 
-            if (aDadosUsuarioVitoria.ibJogadorPrincipal)
+            if (Monitor.TryEnter(outputLock))
             {
-                llCodigoUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario2.iiCodigo;
-            }
-            else
-            {
-                llCodigoUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario1.iiCodigo;
-            }
+                try
+                {
+                    long llCodigoUsuarioDerrota = 0;
 
-            if (abVitoriaPorAbandono)
-            {
-                this.adicionarResultado(llCodigoUsuarioDerrota, DESISTENCIA);
-            }
-            else
-            {
-                this.adicionarResultado(llCodigoUsuarioDerrota, DERROTA);
-            }
+                    this.adicionarResultado(aDadosUsuarioVitoria.iiCodigo, VITORIA);
 
+                    if (aDadosUsuarioVitoria.ibJogadorPrincipal)
+                    {
+                        llCodigoUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario2.iiCodigo;
+                    }
+                    else
+                    {
+                        llCodigoUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario1.iiCodigo;
+                    }
+
+                    if (abVitoriaPorAbandono)
+                    {
+                        this.adicionarResultado(llCodigoUsuarioDerrota, DESISTENCIA);
+                    }
+                    else
+                    {
+                        this.adicionarResultado(llCodigoUsuarioDerrota, DERROTA);
+                    }
+                }
+                finally
+                {
+                    Monitor.Exit(outputLock);
+                }
+            }
             return lDados;
         }
 
