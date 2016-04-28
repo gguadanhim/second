@@ -208,7 +208,7 @@ namespace Second
                         {
                             liContador++;
                             Thread.Sleep(1000);
-                            if (liContador == 150)
+                            if (liContador == 25)
                             {
                                 lDadosUsuario.iDadosPartida.VerificaResultado(lDadosUsuario, true);
                                 RemovePartida(lDadosUsuario);
