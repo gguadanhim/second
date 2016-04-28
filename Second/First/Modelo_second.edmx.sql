@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/26/2016 21:02:05
+-- Date Created: 04/27/2016 22:55:38
 -- Generated from EDMX file: D:\Git\second\second\First\Modelo_second.edmx
 -- --------------------------------------------------
 
@@ -20,6 +20,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PerfilSetUsuarioSet]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PerfilSet] DROP CONSTRAINT [FK_PerfilSetUsuarioSet];
 GO
+IF OBJECT_ID(N'[dbo].[FK_resultados_usuarioUsuarioSet]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[resultados_usuarioSet] DROP CONSTRAINT [FK_resultados_usuarioUsuarioSet];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -30,6 +33,9 @@ IF OBJECT_ID(N'[dbo].[PerfilSet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[UsuarioSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UsuarioSet];
+GO
+IF OBJECT_ID(N'[dbo].[resultados_usuarioSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[resultados_usuarioSet];
 GO
 
 -- --------------------------------------------------

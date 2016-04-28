@@ -58,7 +58,7 @@ namespace Second
             return lDados;
         }
 
-        private DadosRetorno adicionarResultado(long aiCodigoUsuario, int aiTipo)
+        public DadosRetorno adicionarResultado(long aiCodigoUsuario, int aiTipo)
         {
             DadosRetorno lDados = new DadosRetorno();
             resultados_usuario lResultado = null;

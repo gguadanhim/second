@@ -35,6 +35,17 @@ namespace Second
 
             return lDadosRetorno;
         }
+
+        [WebMethod]
+        public DadosRetorno teste()
+        {
+            DadosPartida ll = new DadosPartida();
+            ll.adicionarResultado(7,1);
+            DadosRetorno lDadosRetorno = new DadosRetorno();
+
+            return lDadosRetorno;
+        }
+
         [WebMethod]
         public Boolean VerificarUsuario(String asNome)
         {

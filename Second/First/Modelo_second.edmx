@@ -122,7 +122,7 @@
           <NavigationProperty Name="UsuarioSet" Relationship="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuarioUsuarioSet" FromRole="resultados_usuario" ToRole="UsuarioSet" />
         </EntityType>
         <Association Name="resultados_usuarioUsuarioSet">
-          <End Type="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuario" Role="resultados_usuario" Multiplicity="1" />
+          <End Type="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuario" Role="resultados_usuario" Multiplicity="0..1" />
           <End Type="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Role="UsuarioSet" Multiplicity="1" />
         </Association>
       </Schema>
