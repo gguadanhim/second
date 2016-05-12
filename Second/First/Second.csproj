@@ -88,10 +88,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControleDados.cs" />
     <Compile Include="ControlePartidas.cs" />
     <Compile Include="ControleUsuario.cs" />
     <Compile Include="DadosPartida.cs" />
     <Compile Include="DadosPerfil.cs" />
+    <Compile Include="DadosRank.cs" />
     <Compile Include="DadosRetorno.cs" />
     <Compile Include="DadosTabuleiro.cs" />
     <Compile Include="DadosUltimaJogada.cs" />

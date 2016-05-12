@@ -19,11 +19,20 @@ namespace Second
     public class Second : System.Web.Services.WebService
     {
         private ControleUsuario iControleUsuarios;
+        private ControleDados iControleDados;
         static ControlePartidas controlePartidas = new ControlePartidas();
 
         public Second()
         {
-            iControleUsuarios  = new ControleUsuario();
+            iControleUsuarios = new ControleUsuario();
+            iControleDados = new ControleDados();
+        }
+
+
+        [WebMethod]
+        public List<DadosRank> BuscarRanking()
+        {
+            return iControleDados.getDadosRanking();
         }
 
         [WebMethod]
@@ -174,6 +183,12 @@ namespace Second
             lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado = aiPosicao;
 
             return ldadoRetorno;
+        }
+
+        [WebMethod]
+        public DadosRank BuscarHistorico(long aiJogador)
+        {
+            return iControleDados.getDadosRanking(aiJogador);
         }
 
         [WebMethod]
