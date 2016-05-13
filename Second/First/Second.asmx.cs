@@ -47,12 +47,6 @@ namespace Second
         [WebMethod]
         public DadosRetorno teste()
         {
-            DadosUsuario lDadosUsuario;
-            DadosPartida ll = new DadosPartida();
-
-            lDadosUsuario = controlePartidas.getDadosUsuario(1);
-
-            lDadosUsuario.iDadosPartida.VerificaResultado(lDadosUsuario, false);
             DadosRetorno lDadosRetorno = new DadosRetorno();
 
             return lDadosRetorno;
