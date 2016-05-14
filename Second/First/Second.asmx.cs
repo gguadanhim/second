@@ -28,12 +28,12 @@ namespace Second
             iControleDados = new ControleDados();
         }
 
-        /*[WebMethod]
+        [WebMethod]
         public List<DadosRank> BuscarRanking()
         {
             return iControleDados.getDadosRanking();
         }
-        */
+        
         [WebMethod]
         public DadosRetorno contaPartidas()
         {
