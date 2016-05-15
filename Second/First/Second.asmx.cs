@@ -179,9 +179,9 @@ namespace Second
         }
 
         [WebMethod]
-        public List<DadosPerfil> BuscarAmigo(long aiJogador, String asNome)
+        public List<DadosPerfil> BuscarNovosAmigos(long aiJogador, String asNome)
         {
-            return iControleDados.BuscarAmigos(aiJogador,asNome);
+            return iControleDados.BuscarNovosAmigos(aiJogador,asNome);
         }
 
         [WebMethod]

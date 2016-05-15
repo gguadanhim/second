@@ -72,7 +72,7 @@ namespace Second
             return lLista;
         }
 
-        public List<DadosPerfil> BuscarAmigos(long alUsuario,String asNome){
+        public List<DadosPerfil> BuscarNovosAmigos(long alUsuario,String asNome){
             List<DadosPerfil> ilListaAmigos = new List<DadosPerfil>();
 
             try
@@ -100,6 +100,36 @@ namespace Second
                 System.Console.WriteLine(ex.Message);
             }
             
+            return ilListaAmigos;
+        }
+
+        public List<DadosPerfil> BuscarAmigos(long alUsuario)
+        {
+            List<DadosPerfil> ilListaAmigos = new List<DadosPerfil>();
+
+            try
+            {
+                using (var banco = new modelo_second())
+                {
+                    var listaUsuarios = from p in banco.UsuarioSet
+                                        select p;
+
+                    foreach (var item in listaUsuarios)
+                    {
+                        DadosPerfil lDados = new DadosPerfil();
+                        lDados.ilCodigo = item.Id;
+                        lDados.isNick = item.nick;
+                        lDados.isNome = item.PerfilSet.nome;
+                        lDados.iFoto = item.PerfilSet.foto;
+                        ilListaAmigos.Add(lDados);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+            }
+
             return ilListaAmigos;
         }
     }
