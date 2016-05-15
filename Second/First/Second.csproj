@@ -88,6 +88,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="amigos.cs">
+      <DependentUpon>Modelo_second.tt</DependentUpon>
+    </Compile>
     <Compile Include="ControleDados.cs" />
     <Compile Include="ControlePartidas.cs" />
     <Compile Include="ControleUsuario.cs" />

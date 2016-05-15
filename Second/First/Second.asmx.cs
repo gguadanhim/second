@@ -179,6 +179,12 @@ namespace Second
         }
 
         [WebMethod]
+        public List<DadosPerfil> BuscarAmigo(long aiJogador, String asNome)
+        {
+            return iControleDados.BuscarAmigos(aiJogador,asNome);
+        }
+
+        [WebMethod]
         public DadosRank BuscarHistorico(long aiJogador)
         {
             return iControleDados.getDadosRanking(aiJogador);
