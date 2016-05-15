@@ -14,6 +14,13 @@ namespace Second
     
     public partial class UsuarioSet
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UsuarioSet()
+        {
+            this.amigos_adicionados = new HashSet<amigos>();
+            this.meus_convites = new HashSet<amigos>();
+        }
+    
         public int Id { get; set; }
         public string nick { get; set; }
         public string uuid { get; set; }
@@ -21,5 +28,9 @@ namespace Second
     
         public virtual PerfilSet PerfilSet { get; set; }
         public virtual resultados_usuario resultados_usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<amigos> amigos_adicionados { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<amigos> meus_convites { get; set; }
     }
 }

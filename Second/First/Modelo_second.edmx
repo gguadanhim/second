@@ -9,6 +9,7 @@
     <EntitySet Name="PerfilSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UsuarioSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="resultados_usuarioSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.resultados_usuarioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="amigosSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.amigosSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="PerfilSetUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSetUsuarioSet">
       <End Role="PerfilSet" EntitySet="PerfilSet" />
       <End Role="UsuarioSet" EntitySet="UsuarioSet" />
@@ -16,6 +17,14 @@
     <AssociationSet Name="resultados_usuarioUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.resultados_usuarioUsuarioSet">
       <End Role="resultados_usuario" EntitySet="resultados_usuarioSet" />
       <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioSetamigos" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSetamigos">
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+      <End Role="amigos" EntitySet="amigosSet" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioSetamigos1" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSetamigos1">
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+      <End Role="amigos" EntitySet="amigosSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="PerfilSet">
@@ -46,6 +55,15 @@
     <Property Name="desistencias" Type="int" Nullable="false" />
     <Property Name="UsuarioSet_Id" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="amigosSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aceite" Type="int" Nullable="false" />
+    <Property Name="UsuarioSet_Id" Type="int" Nullable="false" />
+    <Property Name="Convidados_Id" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="PerfilSetUsuarioSet">
     <End Role="PerfilSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" Multiplicity="*" />
     <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
@@ -67,6 +85,30 @@
       </Principal>
       <Dependent Role="resultados_usuario">
         <PropertyRef Name="UsuarioSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioSetamigos">
+    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
+    <End Role="amigos" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.amigosSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsuarioSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="amigos">
+        <PropertyRef Name="UsuarioSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioSetamigos1">
+    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
+    <End Role="amigos" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.amigosSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsuarioSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="amigos">
+        <PropertyRef Name="Convidados_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -93,6 +135,8 @@
           <Property Name="Perfil_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PerfilSet" Relationship="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" FromRole="UsuarioSet" ToRole="PerfilSet" />
           <NavigationProperty Name="resultados_usuario" Relationship="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuarioUsuarioSet" FromRole="UsuarioSet" ToRole="resultados_usuario" />
+          <NavigationProperty Name="amigos_adicionados" Relationship="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos" FromRole="UsuarioSet" ToRole="amigos" />
+          <NavigationProperty Name="meus_convites" Relationship="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos1" FromRole="UsuarioSet" ToRole="amigos" />
         </EntityType>
         <EntityContainer Name="modelo_second" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="PerfilSet" EntityType="Self.PerfilSet" />
@@ -105,6 +149,15 @@
           <AssociationSet Name="resultados_usuarioUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuarioUsuarioSet">
             <End Role="resultados_usuario" EntitySet="resultados_usuarioSet" />
             <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+          </AssociationSet>
+          <EntitySet Name="amigosSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.amigos" />
+          <AssociationSet Name="UsuarioSetamigos" Association="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos">
+            <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+            <End Role="amigos" EntitySet="amigosSet" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioSetamigos1" Association="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos1">
+            <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+            <End Role="amigos" EntitySet="amigosSet" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="PerfilSetUsuarioSet">
@@ -124,6 +177,23 @@
         <Association Name="resultados_usuarioUsuarioSet">
           <End Type="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuario" Role="resultados_usuario" Multiplicity="0..1" />
           <End Type="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Role="UsuarioSet" Multiplicity="1" />
+        </Association>
+        <EntityType Name="amigos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aceite" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UsuarioSet" Relationship="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos" FromRole="amigos" ToRole="UsuarioSet" />
+          <NavigationProperty Name="Convidados" Relationship="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos1" FromRole="amigos" ToRole="UsuarioSet" />
+        </EntityType>
+        <Association Name="UsuarioSetamigos">
+          <End Type="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Role="UsuarioSet" Multiplicity="1" />
+          <End Type="dbecc20a0950a3450cad9aa555018154efModel.amigos" Role="amigos" Multiplicity="*" />
+        </Association>
+        <Association Name="UsuarioSetamigos1">
+          <End Type="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Role="UsuarioSet" Multiplicity="1" />
+          <End Type="dbecc20a0950a3450cad9aa555018154efModel.amigos" Role="amigos" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -160,6 +230,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="amigosSet">
+      <EntityTypeMapping TypeName="IsTypeOf(dbecc20a0950a3450cad9aa555018154efModel.amigos)">
+        <MappingFragment StoreEntitySet="amigosSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="aceite" ColumnName="aceite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="PerfilSetUsuarioSet" TypeName="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" StoreEntitySet="PerfilSet">
       <EndProperty Name="UsuarioSet">
         <ScalarProperty Name="Id" ColumnName="UsuarioSet_Id" />
@@ -173,6 +251,22 @@
         <ScalarProperty Name="Id" ColumnName="UsuarioSet_Id" />
       </EndProperty>
       <EndProperty Name="resultados_usuario">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UsuarioSetamigos" TypeName="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos" StoreEntitySet="amigosSet">
+      <EndProperty Name="UsuarioSet">
+        <ScalarProperty Name="Id" ColumnName="UsuarioSet_Id" />
+      </EndProperty>
+      <EndProperty Name="amigos">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UsuarioSetamigos1" TypeName="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos1" StoreEntitySet="amigosSet">
+      <EndProperty Name="UsuarioSet">
+        <ScalarProperty Name="Id" ColumnName="Convidados_Id" />
+      </EndProperty>
+      <EndProperty Name="amigos">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

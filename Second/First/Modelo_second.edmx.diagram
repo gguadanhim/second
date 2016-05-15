@@ -6,10 +6,13 @@
     <edmx:Diagrams>
       <Diagram DiagramId="61a4d10619c64e6db26c46dec1be7915" Name="Diagram1">
         <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.PerfilSet" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Width="1.875" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" />
-        <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuario" Width="2.5" PointX="5.375" PointY="1.125" />
+        <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuario" Width="2.5" PointX="8.75" PointY="1.125" />
         <AssociationConnector Association="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuarioUsuarioSet" />
+        <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.amigos" Width="2.75" PointX="6" PointY="3.5" />
+        <AssociationConnector Association="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos" />
+        <AssociationConnector Association="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/27/2016 22:55:38
+-- Date Created: 05/15/2016 17:41:20
 -- Generated from EDMX file: D:\Git\second\second\First\Modelo_second.edmx
 -- --------------------------------------------------
 
@@ -70,6 +70,15 @@ CREATE TABLE [dbo].[resultados_usuarioSet] (
 );
 GO
 
+-- Creating table 'amigosSet'
+CREATE TABLE [dbo].[amigosSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [aceite] int  NOT NULL,
+    [UsuarioSet_Id] int  NOT NULL,
+    [Convidados_Id] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -89,6 +98,12 @@ GO
 -- Creating primary key on [Id] in table 'resultados_usuarioSet'
 ALTER TABLE [dbo].[resultados_usuarioSet]
 ADD CONSTRAINT [PK_resultados_usuarioSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'amigosSet'
+ALTER TABLE [dbo].[amigosSet]
+ADD CONSTRAINT [PK_amigosSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -124,6 +139,36 @@ GO
 CREATE INDEX [IX_FK_resultados_usuarioUsuarioSet]
 ON [dbo].[resultados_usuarioSet]
     ([UsuarioSet_Id]);
+GO
+
+-- Creating foreign key on [UsuarioSet_Id] in table 'amigosSet'
+ALTER TABLE [dbo].[amigosSet]
+ADD CONSTRAINT [FK_UsuarioSetamigos]
+    FOREIGN KEY ([UsuarioSet_Id])
+    REFERENCES [dbo].[UsuarioSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UsuarioSetamigos'
+CREATE INDEX [IX_FK_UsuarioSetamigos]
+ON [dbo].[amigosSet]
+    ([UsuarioSet_Id]);
+GO
+
+-- Creating foreign key on [Convidados_Id] in table 'amigosSet'
+ALTER TABLE [dbo].[amigosSet]
+ADD CONSTRAINT [FK_UsuarioSetamigos1]
+    FOREIGN KEY ([Convidados_Id])
+    REFERENCES [dbo].[UsuarioSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UsuarioSetamigos1'
+CREATE INDEX [IX_FK_UsuarioSetamigos1]
+ON [dbo].[amigosSet]
+    ([Convidados_Id]);
 GO
 
 -- --------------------------------------------------

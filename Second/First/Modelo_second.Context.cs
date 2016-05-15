@@ -28,5 +28,6 @@ namespace Second
         public virtual DbSet<PerfilSet> PerfilSet { get; set; }
         public virtual DbSet<UsuarioSet> UsuarioSet { get; set; }
         public virtual DbSet<resultados_usuario> resultados_usuarioSet { get; set; }
+        public virtual DbSet<amigos> amigosSet { get; set; }
     }
 }
