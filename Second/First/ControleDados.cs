@@ -114,6 +114,11 @@ namespace Second
                     var listaUsuarios = from p in banco.amigosSet
                                         where (p.UsuarioSet.Id == alUsuario)
                                         select p;
+                    
+                    var listaConvites = from p in banco.amigosSet
+                                       where (p.Convidados.Id == alUsuario)
+                                          && p.aceite == 0
+                                      select p;
 
                     foreach (var item in listaUsuarios)
                     {
@@ -123,6 +128,18 @@ namespace Second
                         lDados.isNome = item.Convidados.PerfilSet.nome;
                         lDados.iFoto = item.Convidados.PerfilSet.foto;
                         lDados.ilConviteAceito = item.aceite; 
+
+                        ilListaAmigos.Add(lDados);
+                    }
+
+                    foreach (var item in listaConvites)
+                    {
+                        DadosPerfil lDados = new DadosPerfil();
+                        lDados.ilCodigo = item.Convidados.Id;
+                        lDados.isNick = item.Convidados.nick;
+                        lDados.isNome = item.Convidados.PerfilSet.nome;
+                        lDados.iFoto = item.Convidados.PerfilSet.foto;
+                        lDados.ilConviteAceito = 2;
 
                         ilListaAmigos.Add(lDados);
                     }
