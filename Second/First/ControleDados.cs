@@ -135,10 +135,10 @@ namespace Second
                     foreach (var item in listaConvites)
                     {
                         DadosPerfil lDados = new DadosPerfil();
-                        lDados.ilCodigo = item.Convidados.Id;
-                        lDados.isNick = item.Convidados.nick;
-                        lDados.isNome = item.Convidados.PerfilSet.nome;
-                        lDados.iFoto = item.Convidados.PerfilSet.foto;
+                        lDados.ilCodigo = item.UsuarioSet.Id;
+                        lDados.isNick = item.UsuarioSet.nick;
+                        lDados.isNome = item.UsuarioSet.PerfilSet.nome;
+                        lDados.iFoto = item.UsuarioSet.PerfilSet.foto;
                         lDados.ilConviteAceito = 2;
 
                         ilListaAmigos.Add(lDados);
