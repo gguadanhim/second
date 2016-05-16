@@ -185,6 +185,30 @@ namespace Second
         }
 
         [WebMethod]
+        public List<DadosPerfil> BuscarAmigos(long aiJogador)
+        {
+            return iControleDados.BuscarAmigos(aiJogador);
+        }
+
+        [WebMethod]
+        public DadosRetorno AceitarAmigo(long alUsuario, long alAmigo, long status)
+        {
+            return iControleDados.AceitarAmigo(alUsuario, alAmigo, status);
+        }
+
+        [WebMethod]
+        public DadosRetorno RemoverAmigo(long alUsuario, long alAmigo)
+        {
+            return iControleDados.RemoverAmigo(alUsuario, alAmigo);
+        }
+
+        [WebMethod]
+        public DadosRetorno AdicionarAmigo(long alUsuario, long alAmigo)
+        {
+            return iControleDados.AdicionarAmigo(alUsuario, alAmigo);
+        }
+
+        [WebMethod]
         public DadosRank BuscarHistorico(long aiJogador)
         {
             return iControleDados.getDadosRanking(aiJogador);

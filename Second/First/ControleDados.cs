@@ -111,16 +111,18 @@ namespace Second
             {
                 using (var banco = new modelo_second())
                 {
-                    var listaUsuarios = from p in banco.UsuarioSet
+                    var listaUsuarios = from p in banco.amigosSet
+                                        where (p.UsuarioSet.Id == alUsuario)
+                                        //|| (p.Convidados.Id == alUsuario)
                                         select p;
 
                     foreach (var item in listaUsuarios)
                     {
                         DadosPerfil lDados = new DadosPerfil();
-                        lDados.ilCodigo = item.Id;
-                        lDados.isNick = item.nick;
-                        lDados.isNome = item.PerfilSet.nome;
-                        lDados.iFoto = item.PerfilSet.foto;
+                        lDados.ilCodigo = item.Convidados.Id;
+                        lDados.isNick = item.Convidados.nick;
+                        lDados.isNome = item.Convidados.PerfilSet.nome;
+                        lDados.iFoto = item.Convidados.PerfilSet.foto;
                         ilListaAmigos.Add(lDados);
                     }
                 }
@@ -131,6 +133,140 @@ namespace Second
             }
 
             return ilListaAmigos;
+        }
+
+        public DadosRetorno AdicionarAmigo(long alUsuario, long alAmigo)
+        {
+            DadosRetorno lRetorno = new DadosRetorno();
+
+            try
+            {
+                using (var banco = new modelo_second())
+                {
+
+                    var listaUsuario = from p in banco.UsuarioSet 
+                                      where p.Id == alUsuario
+                                     select p;
+
+                    var listaUsuarioAdicionado = from p in banco.UsuarioSet
+                                                where p.Id == alAmigo
+                                               select p;
+
+                    amigos lAmigos = new amigos();
+
+                    lAmigos.aceite = 0;
+                    lAmigos.UsuarioSet = listaUsuario.First();
+                    lAmigos.Convidados = listaUsuarioAdicionado.First();
+
+                    banco.amigosSet.Add(lAmigos);
+                    banco.SaveChanges();
+                    lRetorno.liCodigo = 1; 
+                }
+            }
+            catch (Exception ex)
+            {
+                lRetorno.liCodigo = -1;
+                lRetorno.lsMensagem = ex.Message;
+                System.Console.WriteLine(ex.Message);
+            }
+
+            return lRetorno;
+        }
+
+        public DadosRetorno RemoverAmigo(long alUsuario, long alAmigo)
+        {
+            DadosRetorno lRetorno = new DadosRetorno();
+
+            try
+            {
+                using (var banco = new modelo_second())
+                {
+
+                    var listaConvitesFeito = from p in banco.amigosSet
+                                            where p.Convidados.Id == alUsuario
+                                               && p.UsuarioSet.Id == alAmigo
+                                           select p;
+
+                    var listaConvitesAceito = from p in banco.amigosSet
+                                              where p.Convidados.Id == alAmigo
+                                                 && p.UsuarioSet.Id == alUsuario
+                                             select p;
+
+                    banco.amigosSet.Remove(listaConvitesFeito.First());
+                    banco.amigosSet.Remove(listaConvitesAceito.First());
+                    banco.SaveChanges();
+                    lRetorno.liCodigo = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                lRetorno.liCodigo = -1;
+                lRetorno.lsMensagem = ex.Message;
+                System.Console.WriteLine(ex.Message);
+            }
+
+            return lRetorno;
+        }
+
+        public DadosRetorno AceitarAmigo(long alUsuario, long alAmigo,long status)
+        {
+            DadosRetorno lRetorno = new DadosRetorno();
+            const long ACEITO = 1;
+            const long RECUSADO = 2;
+
+            try
+            {
+                using (var banco = new modelo_second())
+                {
+
+                    var listaConvites = from p in banco.amigosSet 
+                                       where p.Convidados.Id == alUsuario
+                                          && p.UsuarioSet.Id == alAmigo 
+                                       select p;
+
+                    if (listaConvites.Count() > 0)
+                    {
+                        if (status == ACEITO)
+                        {
+                            var listaUsuario = from p in banco.UsuarioSet
+                                               where p.Id == alUsuario
+                                               select p;
+
+                            var listaUsuarioAdicionado = from p in banco.UsuarioSet
+                                                         where p.Id == alAmigo
+                                                         select p;
+
+                            listaConvites.First().aceite = 1;
+
+                            amigos lAmigos = new amigos();
+
+                            lAmigos.aceite = 1;
+                            lAmigos.UsuarioSet = listaUsuario.First();
+                            lAmigos.Convidados = listaUsuarioAdicionado.First();
+                            banco.amigosSet.Add(lAmigos);
+                            lRetorno.liCodigo = 1;
+                        }
+                        else
+                        {
+                            banco.amigosSet.Remove(listaConvites.First());
+                            lRetorno.liCodigo = 1;
+                        }
+                        banco.SaveChanges();
+                    }
+                    else
+                    {
+                        lRetorno.liCodigo = -2;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lRetorno.liCodigo = -1;
+                lRetorno.lsMensagem = ex.Message;
+                System.Console.WriteLine(ex.Message);
+            }
+
+            return lRetorno;
         }
     }
 }

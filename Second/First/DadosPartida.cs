@@ -42,7 +42,7 @@ namespace Second
                     long llCodigoUsuarioDerrota = 0;
 
                     this.adicionarResultado(aDadosUsuarioVitoria.iiCodigo, VITORIA);
-                    System.Console.WriteLine("GABRIELGENEROSO");
+
                     if (aDadosUsuarioVitoria.ibJogadorPrincipal)
                     {
                         llCodigoUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario2.iiCodigo;
