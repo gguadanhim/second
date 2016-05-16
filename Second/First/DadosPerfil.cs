@@ -11,5 +11,6 @@ namespace Second
         public String isNome { get; set; }
         public String isNick { get; set; }
         public long ilCodigo { get; set; }
+        public long ilConviteAceito { get; set; }
     }
 }

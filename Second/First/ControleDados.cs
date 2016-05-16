@@ -113,7 +113,6 @@ namespace Second
                 {
                     var listaUsuarios = from p in banco.amigosSet
                                         where (p.UsuarioSet.Id == alUsuario)
-                                        //|| (p.Convidados.Id == alUsuario)
                                         select p;
 
                     foreach (var item in listaUsuarios)
@@ -123,6 +122,8 @@ namespace Second
                         lDados.isNick = item.Convidados.nick;
                         lDados.isNome = item.Convidados.PerfilSet.nome;
                         lDados.iFoto = item.Convidados.PerfilSet.foto;
+                        lDados.ilConviteAceito = item.aceite; 
+
                         ilListaAmigos.Add(lDados);
                     }
                 }
