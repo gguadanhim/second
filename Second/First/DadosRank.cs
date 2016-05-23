@@ -11,6 +11,8 @@ namespace Second
         public long ilVitorias;
         public long ilDerrotas;
         public long ilDesistencias;
+        public long ilPontos;
+        public long ilRank;
         public String isNomeUsuariao;
     }
 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/15/2016 17:41:20
+-- Date Created: 05/22/2016 00:12:48
 -- Generated from EDMX file: D:\Git\second\second\First\Modelo_second.edmx
 -- --------------------------------------------------
 
@@ -23,6 +23,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_resultados_usuarioUsuarioSet]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[resultados_usuarioSet] DROP CONSTRAINT [FK_resultados_usuarioUsuarioSet];
 GO
+IF OBJECT_ID(N'[dbo].[FK_UsuarioSetamigos]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[amigosSet] DROP CONSTRAINT [FK_UsuarioSetamigos];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UsuarioSetamigos1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[amigosSet] DROP CONSTRAINT [FK_UsuarioSetamigos1];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -36,6 +42,9 @@ IF OBJECT_ID(N'[dbo].[UsuarioSet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[resultados_usuarioSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[resultados_usuarioSet];
+GO
+IF OBJECT_ID(N'[dbo].[amigosSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[amigosSet];
 GO
 
 -- --------------------------------------------------
@@ -66,6 +75,7 @@ CREATE TABLE [dbo].[resultados_usuarioSet] (
     [vitorias] int  NOT NULL,
     [derrotas] int  NOT NULL,
     [desistencias] int  NOT NULL,
+    [pontos] int  NOT NULL,
     [UsuarioSet_Id] int  NOT NULL
 );
 GO

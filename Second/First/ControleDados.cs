@@ -7,7 +7,7 @@ namespace Second
 {
     public class ControleDados
     {
-        public DadosRank getDadosRanking(long alUsuario)
+        public DadosRank getDadosRankingUsuario(long alUsuario)
         {
             DadosRank lDados = new DadosRank();
 
@@ -26,6 +26,7 @@ namespace Second
                         lDados.ilDerrotas = listaRanking.First().derrotas;
                         lDados.ilDesistencias = listaRanking.First().desistencias;
                         lDados.ilVitorias = listaRanking.First().vitorias;
+                        lDados.ilPontos = listaRanking.First().pontos;
                         lDados.liCodigo = 1;
                     }
                 }
@@ -40,7 +41,7 @@ namespace Second
             return lDados;
         }
 
-        public List<DadosRank> getDadosRanking()
+        public List<DadosRank> getDadosRanking(long alPosicao)
         {
             List<DadosRank> lLista = new List<DadosRank>();
 
@@ -48,17 +49,23 @@ namespace Second
             {
                 using (var banco = new modelo_second())
                 {
-                    var listaRanking = from p in banco.resultados_usuarioSet
-                                       select p;
+                    var listaRanking = (from v in banco.view_rank
+                                       from p in banco.resultados_usuarioSet
+                                       where ((v.UsuarioSet_Id == p.UsuarioSet.Id)
+                                          && (alPosicao == 0 || v.rank > alPosicao))
+                                       select new { v, p }).Take(2);
+
 
                     foreach (var item in listaRanking)
                     {
                         DadosRank lDados = new DadosRank();
-                        lDados.ilCodigoUsuario = item.UsuarioSet.Id;
-                        lDados.isNomeUsuariao = item.UsuarioSet.nick;
-                        lDados.ilDerrotas = item.derrotas;
-                        lDados.ilDesistencias = item.desistencias;
-                        lDados.ilVitorias = item.vitorias;
+                        lDados.ilCodigoUsuario = item.p.UsuarioSet.Id;
+                        lDados.isNomeUsuariao = item.p.UsuarioSet.nick;
+                        lDados.ilDerrotas = item.p.derrotas;
+                        lDados.ilDesistencias = item.p.desistencias;
+                        lDados.ilVitorias = item.p.vitorias;
+                        lDados.ilPontos = item.p.pontos;
+                        lDados.ilRank = (long)item.v.rank;
                         lDados.liCodigo = 1;
                         lLista.Add(lDados);
                     }

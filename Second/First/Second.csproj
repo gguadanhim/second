@@ -130,6 +130,9 @@
     <Compile Include="UsuarioSet.cs">
       <DependentUpon>Modelo_second.tt</DependentUpon>
     </Compile>
+    <Compile Include="view_rank.cs">
+      <DependentUpon>Modelo_second.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -29,9 +29,9 @@ namespace Second
         }
 
         [WebMethod]
-        public List<DadosRank> BuscarRanking()
+        public List<DadosRank> BuscarRanking(long alposicao)
         {
-            return iControleDados.getDadosRanking();
+            return iControleDados.getDadosRanking(alposicao);
         }
         
         [WebMethod]
@@ -45,10 +45,39 @@ namespace Second
         }
 
         [WebMethod]
-        public DadosRetorno teste()
+        public DadosRetorno adicionarteste(long alcodigo, int alpontos)
         {
             DadosRetorno lDadosRetorno = new DadosRetorno();
+            
+            resultados_usuario lResultado = null;
 
+                using (var banco = new modelo_second())
+                {
+                    var resultadosUsuario = from p in banco.resultados_usuarioSet
+                                            where (p.UsuarioSet.Id) == (alcodigo)
+                                        select p;
+
+                    if (resultadosUsuario.Count() > 0)
+                    {
+                        lResultado = resultadosUsuario.First();
+                    }
+                    else
+                    {
+                        lResultado = new resultados_usuario();
+
+                        var dadosUsuario = from p in banco.UsuarioSet
+                                           where (p.Id) == (alcodigo)
+                                           select p;
+
+                        lResultado.UsuarioSet = dadosUsuario.First();
+                        banco.resultados_usuarioSet.Add(lResultado);
+                    }
+
+                    lResultado.pontos += alpontos;
+                     
+                    banco.SaveChanges();
+                }
+            
             return lDadosRetorno;
         }
 
@@ -211,7 +240,7 @@ namespace Second
         [WebMethod]
         public DadosRank BuscarHistorico(long aiJogador)
         {
-            return iControleDados.getDadosRanking(aiJogador);
+            return iControleDados.getDadosRankingUsuario(aiJogador);
         }
 
         [WebMethod]

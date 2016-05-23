@@ -13,6 +13,7 @@
         <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.amigos" Width="2.75" PointX="6" PointY="3.5" />
         <AssociationConnector Association="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos" />
         <AssociationConnector Association="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSetamigos1" />
+        <EntityTypeShape EntityType="dbecc20a0950a3450cad9aa555018154efModel.view_rank" Width="1.5" PointX="3.375" PointY="3.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

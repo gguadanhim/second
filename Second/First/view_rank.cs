@@ -12,14 +12,9 @@ namespace Second
     using System;
     using System.Collections.Generic;
     
-    public partial class resultados_usuario
+    public partial class view_rank
     {
-        public int Id { get; set; }
-        public int vitorias { get; set; }
-        public int derrotas { get; set; }
-        public int desistencias { get; set; }
-        public int pontos { get; set; }
-    
-        public virtual UsuarioSet UsuarioSet { get; set; }
+        public int UsuarioSet_Id { get; set; }
+        public Nullable<long> rank { get; set; }
     }
 }

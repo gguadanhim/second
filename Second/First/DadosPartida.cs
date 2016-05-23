@@ -39,26 +39,26 @@ namespace Second
             {
                 try
                 {
-                    long llCodigoUsuarioDerrota = 0;
+                    DadosUsuario lDadosUsuarioDerrota;
 
-                    this.adicionarResultado(aDadosUsuarioVitoria.iiCodigo, VITORIA);
+                    this.adicionarResultado(aDadosUsuarioVitoria, VITORIA);
 
                     if (aDadosUsuarioVitoria.ibJogadorPrincipal)
                     {
-                        llCodigoUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario2.iiCodigo;
+                        lDadosUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario2;
                     }
                     else
                     {
-                        llCodigoUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario1.iiCodigo;
+                        lDadosUsuarioDerrota = aDadosUsuarioVitoria.iDadosPartida.lUsuario1;
                     }
 
                     if (abVitoriaPorAbandono)
                     {
-                        this.adicionarResultado(llCodigoUsuarioDerrota, DESISTENCIA);
+                        this.adicionarResultado(lDadosUsuarioDerrota, DESISTENCIA);
                     }
                     else
                     {
-                        this.adicionarResultado(llCodigoUsuarioDerrota, DERROTA);
+                        this.adicionarResultado(lDadosUsuarioDerrota, DERROTA);
                     }
                 }
                 finally
@@ -69,16 +69,17 @@ namespace Second
             return lDados;
         }
 
-        public DadosRetorno adicionarResultado(long aiCodigoUsuario, int aiTipo)
+        public DadosRetorno adicionarResultado(DadosUsuario aDadosUsuario, int aiTipo)
         {
             DadosRetorno lDados = new DadosRetorno();
             resultados_usuario lResultado = null;
+            int llPontos = 3;
             try
             {
                 using (var banco = new modelo_second())
                 {
                     var resultadosUsuario = from p in banco.resultados_usuarioSet
-                                        where (p.UsuarioSet.Id) == (aiCodigoUsuario)
+                                            where (p.UsuarioSet.Id) == (aDadosUsuario.iiCodigo)
                                         select p;
 
                     if (resultadosUsuario.Count() > 0)
@@ -90,17 +91,23 @@ namespace Second
                         lResultado = new resultados_usuario();
 
                         var dadosUsuario = from p in banco.UsuarioSet
-                                           where (p.Id) == (aiCodigoUsuario)
+                                           where (p.Id) == (aDadosUsuario.iiCodigo)
                                            select p;
 
                         lResultado.UsuarioSet = dadosUsuario.First();
                         banco.resultados_usuarioSet.Add(lResultado);
                     }
 
+                    if (aDadosUsuario.ibJogadorPrincipal)
+                    {
+                        llPontos = 6;
+                    }
+
                     switch (aiTipo)
                     {
                         case VITORIA:
                             lResultado.vitorias++;
+                            lResultado.pontos += llPontos;
                             break;
                         case DERROTA:
                             lResultado.derrotas++;

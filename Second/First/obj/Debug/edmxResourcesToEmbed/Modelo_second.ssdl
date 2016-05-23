@@ -1,27 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="dbecc20a0950a3450cad9aa555018154efModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="dbecc20a0950a3450cad9aa555018154efModelStoreContainer">
-    <EntitySet Name="PerfilSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UsuarioSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="resultados_usuarioSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.resultados_usuarioSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="amigosSet" EntityType="dbecc20a0950a3450cad9aa555018154efModel.Store.amigosSet" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="PerfilSetUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSetUsuarioSet">
-      <End Role="PerfilSet" EntitySet="PerfilSet" />
-      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
-    </AssociationSet>
-    <AssociationSet Name="resultados_usuarioUsuarioSet" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.resultados_usuarioUsuarioSet">
-      <End Role="resultados_usuario" EntitySet="resultados_usuarioSet" />
-      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
-    </AssociationSet>
-    <AssociationSet Name="UsuarioSetamigos" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSetamigos">
-      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
-      <End Role="amigos" EntitySet="amigosSet" />
-    </AssociationSet>
-    <AssociationSet Name="UsuarioSetamigos1" Association="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSetamigos1">
-      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
-      <End Role="amigos" EntitySet="amigosSet" />
-    </AssociationSet>
-  </EntityContainer>
+<Schema Namespace="dbecc20a0950a3450cad9aa555018154efModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="amigosSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aceite" Type="int" Nullable="false" />
+    <Property Name="UsuarioSet_Id" Type="int" Nullable="false" />
+    <Property Name="Convidados_Id" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="PerfilSet">
     <Key>
       <PropertyRef Name="Id" />
@@ -29,6 +16,17 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="foto" Type="varbinary(max)" Nullable="false" />
     <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UsuarioSet_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="resultados_usuarioSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="vitorias" Type="int" Nullable="false" />
+    <Property Name="derrotas" Type="int" Nullable="false" />
+    <Property Name="desistencias" Type="int" Nullable="false" />
+    <Property Name="pontos" Type="int" Nullable="false" />
     <Property Name="UsuarioSet_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioSet">
@@ -40,28 +38,18 @@
     <Property Name="uuid" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Perfil_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="resultados_usuarioSet">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'dbecc20a0950a3450cad9aa555018154ef.dbo.view_rank' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="view_rank">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="UsuarioSet_Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="vitorias" Type="int" Nullable="false" />
-    <Property Name="derrotas" Type="int" Nullable="false" />
-    <Property Name="desistencias" Type="int" Nullable="false" />
     <Property Name="UsuarioSet_Id" Type="int" Nullable="false" />
+    <Property Name="rank" Type="bigint" />
   </EntityType>
-  <EntityType Name="amigosSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="aceite" Type="int" Nullable="false" />
-    <Property Name="UsuarioSet_Id" Type="int" Nullable="false" />
-    <Property Name="Convidados_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="PerfilSetUsuarioSet">
-    <End Role="PerfilSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.PerfilSet" Multiplicity="*" />
-    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
+  <Association Name="FK_PerfilSetUsuarioSet">
+    <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="1" />
+    <End Role="PerfilSet" Type="Self.PerfilSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UsuarioSet">
         <PropertyRef Name="Id" />
@@ -71,40 +59,68 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="resultados_usuarioUsuarioSet">
-    <End Role="resultados_usuario" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.resultados_usuarioSet" Multiplicity="*" />
-    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
+  <Association Name="FK_resultados_usuarioUsuarioSet">
+    <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="1" />
+    <End Role="resultados_usuarioSet" Type="Self.resultados_usuarioSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UsuarioSet">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="resultados_usuario">
+      <Dependent Role="resultados_usuarioSet">
         <PropertyRef Name="UsuarioSet_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="UsuarioSetamigos">
-    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
-    <End Role="amigos" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.amigosSet" Multiplicity="*" />
+  <Association Name="FK_UsuarioSetamigos">
+    <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="1" />
+    <End Role="amigosSet" Type="Self.amigosSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UsuarioSet">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="amigos">
+      <Dependent Role="amigosSet">
         <PropertyRef Name="UsuarioSet_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="UsuarioSetamigos1">
-    <End Role="UsuarioSet" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.UsuarioSet" Multiplicity="1" />
-    <End Role="amigos" Type="dbecc20a0950a3450cad9aa555018154efModel.Store.amigosSet" Multiplicity="*" />
+  <Association Name="FK_UsuarioSetamigos1">
+    <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="1" />
+    <End Role="amigosSet" Type="Self.amigosSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UsuarioSet">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="amigos">
+      <Dependent Role="amigosSet">
         <PropertyRef Name="Convidados_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="dbecc20a0950a3450cad9aa555018154efModelStoreContainer">
+    <EntitySet Name="amigosSet" EntityType="Self.amigosSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PerfilSet" EntityType="Self.PerfilSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="resultados_usuarioSet" EntityType="Self.resultados_usuarioSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsuarioSet" EntityType="Self.UsuarioSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="view_rank" EntityType="Self.view_rank" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [view_rank].[UsuarioSet_Id] AS [UsuarioSet_Id], 
+    [view_rank].[rank] AS [rank]
+    FROM [dbo].[view_rank] AS [view_rank]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_PerfilSetUsuarioSet" Association="Self.FK_PerfilSetUsuarioSet">
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+      <End Role="PerfilSet" EntitySet="PerfilSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_resultados_usuarioUsuarioSet" Association="Self.FK_resultados_usuarioUsuarioSet">
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+      <End Role="resultados_usuarioSet" EntitySet="resultados_usuarioSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioSetamigos" Association="Self.FK_UsuarioSetamigos">
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+      <End Role="amigosSet" EntitySet="amigosSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioSetamigos1" Association="Self.FK_UsuarioSetamigos1">
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+      <End Role="amigosSet" EntitySet="amigosSet" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

@@ -43,6 +43,7 @@
       <End Role="UsuarioSet" EntitySet="UsuarioSet" />
       <End Role="amigos" EntitySet="amigosSet" />
     </AssociationSet>
+    <EntitySet Name="view_rank" EntityType="dbecc20a0950a3450cad9aa555018154efModel.view_rank" />
   </EntityContainer>
   <Association Name="PerfilSetUsuarioSet">
     <End Type="dbecc20a0950a3450cad9aa555018154efModel.PerfilSet" Role="PerfilSet" Multiplicity="1" />
@@ -57,6 +58,7 @@
     <Property Name="derrotas" Type="Int32" Nullable="false" />
     <Property Name="desistencias" Type="Int32" Nullable="false" />
     <NavigationProperty Name="UsuarioSet" Relationship="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuarioUsuarioSet" FromRole="resultados_usuario" ToRole="UsuarioSet" />
+    <Property Name="pontos" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="resultados_usuarioUsuarioSet">
     <End Type="dbecc20a0950a3450cad9aa555018154efModel.resultados_usuario" Role="resultados_usuario" Multiplicity="0..1" />
@@ -79,4 +81,11 @@
     <End Type="dbecc20a0950a3450cad9aa555018154efModel.UsuarioSet" Role="UsuarioSet" Multiplicity="1" />
     <End Type="dbecc20a0950a3450cad9aa555018154efModel.amigos" Role="amigos" Multiplicity="*" />
   </Association>
+  <EntityType Name="view_rank">
+    <Key>
+      <PropertyRef Name="UsuarioSet_Id" />
+    </Key>
+    <Property Name="UsuarioSet_Id" Type="Int32" Nullable="false" />
+    <Property Name="rank" Type="Int64" />
+  </EntityType>
 </Schema>

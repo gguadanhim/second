@@ -27,6 +27,7 @@
           <ScalarProperty Name="vitorias" ColumnName="vitorias" />
           <ScalarProperty Name="derrotas" ColumnName="derrotas" />
           <ScalarProperty Name="desistencias" ColumnName="desistencias" />
+          <ScalarProperty Name="pontos" ColumnName="pontos" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -70,5 +71,13 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="view_rank">
+      <EntityTypeMapping TypeName="dbecc20a0950a3450cad9aa555018154efModel.view_rank">
+        <MappingFragment StoreEntitySet="view_rank">
+          <ScalarProperty Name="rank" ColumnName="rank" />
+          <ScalarProperty Name="UsuarioSet_Id" ColumnName="UsuarioSet_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
