@@ -257,6 +257,7 @@ namespace Second
 	        {
                 if ((lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilJogador == 0) && (lDadosUsuario.ibJogadorPrincipal))
                 {
+                    ldadoRetorno.lsMensagem = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado.ToString();
                     ldadoRetorno.liCodigo = 12;
                     lbParar = true;
                 }
@@ -265,7 +266,7 @@ namespace Second
                     if (lDadosUsuario.iDadosPartida.StatusPartida == DadosPartida.STATUS_PARTIDA_FINALIZADA)
                     {
                         RemovePartida(lDadosUsuario);
-
+                        ldadoRetorno.lsMensagem = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado.ToString();
                         ldadoRetorno.liCodigo = 10;
                         lbParar = true;
                     }
@@ -279,6 +280,7 @@ namespace Second
                             {
                                 lDadosUsuario.iDadosPartida.VerificaResultado(lDadosUsuario, true);
                                 RemovePartida(lDadosUsuario);
+                                ldadoRetorno.lsMensagem = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado.ToString();
                                 ldadoRetorno.liCodigo = 11;
                                 lbParar = true;
                             }
