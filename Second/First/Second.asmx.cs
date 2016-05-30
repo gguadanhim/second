@@ -264,8 +264,9 @@ namespace Second
                 {
                     if (lDadosUsuario.iDadosPartida.StatusPartida == DadosPartida.STATUS_PARTIDA_FINALIZADA)
                     {
-                        RemovePartida(lDadosUsuario);
+                        ldadoRetorno.lsMensagem = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado.ToString();
                         ldadoRetorno.liCodigo = 10;
+                        RemovePartida(lDadosUsuario);
                         lbParar = true;
                     }
                     else
@@ -277,7 +278,6 @@ namespace Second
                             if (liContador == 25)
                             {
                                 lDadosUsuario.iDadosPartida.VerificaResultado(lDadosUsuario, true);
-                                ldadoRetorno.lsMensagem = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado.ToString();
                                 ldadoRetorno.liCodigo = 11;
                                 RemovePartida(lDadosUsuario);
                                 lbParar = true;
