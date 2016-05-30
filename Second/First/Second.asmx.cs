@@ -288,12 +288,11 @@ namespace Second
                             ldadoRetorno.liCodigo = lDadosUsuario.iDadosPartida.iDadosUltimaJogada.ilSequencialJogado;
                             lbParar = true;
                         }
-                    }
-
-                    if (lbParar)
-                    {
-                        break;
-                    }
+                    }   
+                }
+                if (lbParar)
+                {
+                    break;
                 }
 	        }
 
