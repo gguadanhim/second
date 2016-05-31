@@ -15,18 +15,21 @@ namespace Second
             {
                 using (var banco = new modelo_second())
                 {
-                    var listaRanking = from p in banco.resultados_usuarioSet 
+                    var listaRanking = from p in banco.resultados_usuarioSet
+                                       from v in banco.view_rank
                                         where (p.UsuarioSet.Id ) == (alUsuario)
-                                        select p;
+                                        && (v.UsuarioSet_Id == p.UsuarioSet.Id)
+                                       select new { v, p };
 
                     if (listaRanking.Count() > 0)
                     {
-                        lDados.ilCodigoUsuario = listaRanking.First().UsuarioSet.Id;
-                        lDados.isNomeUsuariao = listaRanking.First().UsuarioSet.nick;
-                        lDados.ilDerrotas = listaRanking.First().derrotas;
-                        lDados.ilDesistencias = listaRanking.First().desistencias;
-                        lDados.ilVitorias = listaRanking.First().vitorias;
-                        lDados.ilPontos = listaRanking.First().pontos;
+                        lDados.ilCodigoUsuario = listaRanking.First().p.UsuarioSet.Id;
+                        lDados.isNomeUsuariao = listaRanking.First().p.UsuarioSet.nick;
+                        lDados.ilDerrotas = listaRanking.First().p.derrotas;
+                        lDados.ilDesistencias = listaRanking.First().p.desistencias;
+                        lDados.ilVitorias = listaRanking.First().p.vitorias;
+                        lDados.ilPontos = listaRanking.First().p.pontos;
+                        lDados.ilRank = (long)listaRanking.First().v.rank;
                         lDados.liCodigo = 1;
                     }
                 }
