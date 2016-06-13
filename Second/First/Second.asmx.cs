@@ -238,6 +238,16 @@ namespace Second
         }
 
         [WebMethod]
+        public DadosServidor BuscarDadosServidor()
+        {
+            DadosServidor lDados = new DadosServidor();
+            lDados.ilJogadoresJogando = controlePartidas.getLista().Where(x => x.iiStatus == DadosUsuario.STATUS_JOGANDO).Count();
+            lDados.ilJogadoresOnline = controlePartidas.getLista().Where(x => x.iiStatus == DadosUsuario.STATUS_ONLINE).Count();
+            lDados.ilPartidas = controlePartidas.getListaPartidas().Count;
+            return lDados;
+        }
+
+        [WebMethod]
         public DadosRank BuscarHistorico(long aiJogador)
         {
             return iControleDados.getDadosRankingUsuario(aiJogador);

@@ -98,6 +98,7 @@
     <Compile Include="DadosPerfil.cs" />
     <Compile Include="DadosRank.cs" />
     <Compile Include="DadosRetorno.cs" />
+    <Compile Include="DadosServidor.cs" />
     <Compile Include="DadosTabuleiro.cs" />
     <Compile Include="DadosUltimaJogada.cs" />
     <Compile Include="DadosUsuario.cs" />
