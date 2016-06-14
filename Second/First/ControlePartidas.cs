@@ -103,6 +103,7 @@ namespace Second
             }
             else
             {
+                getListaPartidas().TryTake(out lDadosPartida);
                 aUsuario2.iiStatus = DadosUsuario.STATUS_ONLINE;
             }
 
