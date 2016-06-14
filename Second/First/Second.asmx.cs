@@ -134,15 +134,19 @@ namespace Second
         {
             DadosRetorno ldadoRetorno = new DadosRetorno();
             DadosUsuario lUsuario1;
-            DadosUsuario lUsuario2;
+            //DadosUsuario lUsuario2;
+            List<DadosUsuario> lLista;
             int liContador = 0;
 
             lUsuario1 = controlePartidas.getDadosUsuario(aiUsuario);
 
-            while (true)
-            {
-                lUsuario2 = controlePartidas.buscaUsuarioOnline(aiUsuario);
+            //while (true)
+            //{
+            lLista = controlePartidas.buscaUsuarioOnline(aiUsuario).ToList<DadosUsuario>();
+            //lUsuario2 = controlePartidas.buscaUsuarioOnline(aiUsuario);
 
+            foreach (var lUsuario2 in lLista)
+            {
                 if (lUsuario2 != null)
                 {
                     if (controlePartidas.criarPartida(lUsuario1, lUsuario2))
@@ -164,6 +168,7 @@ namespace Second
                 {
                     break;
                 }
+                    //}
             }
 
             return ldadoRetorno;

@@ -68,18 +68,13 @@ namespace Second
             return ldados;
         }
 
-        public DadosUsuario buscaUsuarioOnline(long aiUsuarioAtual)
+        public IEnumerable<DadosUsuario> buscaUsuarioOnline(long aiUsuarioAtual)
         {
-            DadosUsuario ldados = null;
             IEnumerable<DadosUsuario> lResult;
 
             lResult = this.getLista().Where(item => item.iiStatus == DadosUsuario.STATUS_ONLINE && item.iiCodigo != aiUsuarioAtual);
-            if (lResult.Count() > 0)
-            {
-                ldados = lResult.First();
-            }
-
-            return ldados;
+            
+            return lResult;
         }
 
         public Boolean criarPartida(DadosUsuario aUsuario1, DadosUsuario aUsuario2)
