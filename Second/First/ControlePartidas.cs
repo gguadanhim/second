@@ -49,7 +49,7 @@ namespace Second
                 {
                     ldados.iiStatus = aiStatus;
                 }
-
+                ldados.alive = DateTime.Now;
                 liRetorno = ldados.iiStatus;
             }
             catch (Exception ex)

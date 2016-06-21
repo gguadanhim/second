@@ -12,7 +12,21 @@ namespace Second
         public const int STATUS_OFFLINE = 0;
         public const int STATUS_ONLINE = 1;
         public const int STATUS_JOGANDO = 2;
-        
+
+        public DateTime alive;
+        public Boolean isOnline
+        {
+            get {
+                    if ((DateTime.Now - alive).Minutes > 1)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+        }
         public long iiCodigo { get; set; }
         public int iiStatus { get; set; }
         public List<int> iListaSelecaoJogador = new List<int>();

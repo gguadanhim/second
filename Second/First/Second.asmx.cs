@@ -242,7 +242,7 @@ namespace Second
         {
             DadosServidor lDados = new DadosServidor();
             lDados.ilJogadoresJogando = controlePartidas.getLista().Where(x => x.iiStatus == DadosUsuario.STATUS_JOGANDO).Count();
-            lDados.ilJogadoresOnline = controlePartidas.getLista().Where(x => x.iiStatus == DadosUsuario.STATUS_ONLINE).Count();
+            lDados.ilJogadoresOnline = controlePartidas.getLista().Where(x => x.iiStatus == DadosUsuario.STATUS_ONLINE && x.isOnline).Count();
             lDados.ilPartidas = controlePartidas.getListaPartidas().Count;
             return lDados;
         }
