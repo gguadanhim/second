@@ -29,9 +29,9 @@ namespace Second
         }
 
         [WebMethod]
-        public List<DadosRank> BuscarRanking(long alposicao)
+        public List<DadosRank> BuscarRanking(long alUserId)
         {
-            return iControleDados.getDadosRanking(alposicao);
+            return iControleDados.getDadosRanking(alUserId);
         }
         
         [WebMethod]

@@ -44,7 +44,7 @@ namespace Second
             return lDados;
         }
 
-        public List<DadosRank> getDadosRanking(long alPosicao)
+        public List<DadosRank> getDadosRanking(long alUserId)
         {
             List<DadosRank> lLista = new List<DadosRank>();
 
@@ -52,10 +52,10 @@ namespace Second
             {
                 using (var banco = new modelo_second())
                 {
+                    Boolean lbEncontrado = false;
                     var listaRanking = (from v in banco.view_rank
-                                       from p in banco.resultados_usuarioSet
-                                       where ((v.UsuarioSet_Id == p.UsuarioSet.Id)
-                                          && (alPosicao == 0 || v.rank > alPosicao))
+                                        from p in banco.resultados_usuarioSet
+                                        where ((v.UsuarioSet_Id == p.UsuarioSet.Id))
                                        select new { v, p }).Take(2);
 
 
@@ -70,6 +70,16 @@ namespace Second
                         lDados.ilPontos = item.p.pontos;
                         lDados.ilRank = (long)item.v.rank;
                         lDados.liCodigo = 1;
+                        lLista.Add(lDados);
+
+                        if (lDados.ilCodigoUsuario == alUserId)
+                        {
+                            lbEncontrado = true;
+                        }
+                    }
+                    if (!lbEncontrado)
+                    {
+                        DadosRank lDados = this.getDadosRankingUsuario(alUserId);
                         lLista.Add(lDados);
                     }
                 }
