@@ -130,6 +130,25 @@ namespace Second
         }
         
         [WebMethod]
+        public DadosRetorno ConvidarAmigo(long aiUsuario, long aiAmigo)
+        {
+            DadosRetorno lDadosRetorno = new DadosRetorno();
+
+            DadosUsuario lUsuario1;
+            DadosUsuario lUsuario2;
+
+            lUsuario1 = controlePartidas.getDadosUsuario(aiUsuario);
+            lUsuario2 = controlePartidas.getDadosUsuario(aiAmigo);
+
+            if (controlePartidas.criarPartida(lUsuario1, lUsuario2))
+            {
+                lDadosRetorno.liCodigo = 1;
+            }
+
+            return lDadosRetorno;
+        }
+
+        [WebMethod]
         public DadosRetorno BuscarPlayerPartida(long aiUsuario)
         {
             DadosRetorno ldadoRetorno = new DadosRetorno();
