@@ -93,6 +93,7 @@ namespace Second
         }
 
         public List<DadosPerfil> BuscarNovosAmigos(long alUsuario,String asNome){
+            
             List<DadosPerfil> ilListaAmigos = new List<DadosPerfil>();
 
             try
@@ -101,17 +102,20 @@ namespace Second
                 {
                     var listaUsuarios = from p in banco.UsuarioSet
                                        where (p.Id) != (alUsuario)
-                                          && (p.nick.Contains(asNome) )
+                                          && (p.nick.Contains(asNome))
                                       select p;
 
                     foreach (var item in listaUsuarios)
                     {
-                        DadosPerfil lDados = new DadosPerfil();
-                        lDados.ilCodigo  = item.Id ;
-                        lDados.isNick = item.nick;
-                        lDados.isNome = item.PerfilSet.nome;
-                        lDados.iFoto = item.PerfilSet.foto;
-                        ilListaAmigos.Add(lDados);
+                        if ((item.meus_convites.Where(a => a.Convidados.Id == alUsuario).Count() == 0) && (item.meus_convites.Where(a => a.UsuarioSet.Id == alUsuario).Count() == 0))
+                        {
+                            DadosPerfil lDados = new DadosPerfil();
+                            lDados.ilCodigo = item.Id;
+                            lDados.isNick = item.nick;
+                            lDados.isNome = item.PerfilSet.nome;
+                            lDados.iFoto = item.PerfilSet.foto;
+                            ilListaAmigos.Add(lDados);
+                        }
                     }
                 }
             }

@@ -1,4 +1,7 @@
-﻿insert into  PerfilSet values (1,'','abc da silva',1);
+﻿select * from AmigosSet
+
+
+insert into  PerfilSet values (1,'','abc da silva',1);
 insert into UsuarioSet values (1,'abc',1);
 insert into UsuarioSet values (2,'def',2);
 insert into UsuarioSet values (3,'ghi',3);
