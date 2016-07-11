@@ -1,5 +1,6 @@
 ﻿select * from AmigosSet
 
+delete from AmigosSet where Convidados_Id =6
 
 insert into  PerfilSet values (1,'','abc da silva',1);
 insert into UsuarioSet values (1,'abc',1);
@@ -19,6 +20,7 @@ where usuarioset_id = 4
 select * from view_rank where UsuarioSet_id = 4
 select * from  resultados_usuarioSet
 select * from UsuarioSet
+select * from PerfilSet
 
 update resultados_usuarioSet set pontos = 10 where UsuarioSet_Id = 4
 commit

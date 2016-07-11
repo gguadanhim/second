@@ -186,23 +186,35 @@ namespace Second
                 using (var banco = new modelo_second())
                 {
 
-                    var listaUsuario = from p in banco.UsuarioSet 
-                                      where p.Id == alUsuario
-                                     select p;
+                    var listaConvites = from p in banco.amigosSet 
+                                       where p.UsuarioSet.Id == alUsuario
+                                          && p.Convidados.Perfil_Id == alAmigo
+                                       select p;
 
-                    var listaUsuarioAdicionado = from p in banco.UsuarioSet
-                                                where p.Id == alAmigo
-                                               select p;
+                    if (listaConvites.Count() == 0)
+                    {
+                        var listaUsuario = from p in banco.UsuarioSet
+                                           where p.Id == alUsuario
+                                           select p;
 
-                    amigos lAmigos = new amigos();
+                        var listaUsuarioAdicionado = from p in banco.UsuarioSet
+                                                     where p.Id == alAmigo
+                                                     select p;
 
-                    lAmigos.aceite = 0;
-                    lAmigos.UsuarioSet = listaUsuario.First();
-                    lAmigos.Convidados = listaUsuarioAdicionado.First();
+                        amigos lAmigos = new amigos();
 
-                    banco.amigosSet.Add(lAmigos);
-                    banco.SaveChanges();
-                    lRetorno.liCodigo = 1; 
+                        lAmigos.aceite = 0;
+                        lAmigos.UsuarioSet = listaUsuario.First();
+                        lAmigos.Convidados = listaUsuarioAdicionado.First();
+
+                        banco.amigosSet.Add(lAmigos);
+                        banco.SaveChanges();
+                        lRetorno.liCodigo = 1;
+                    }
+                    else
+                    {
+                        lRetorno.liCodigo = 2;
+                    }
                 }
             }
             catch (Exception ex)
