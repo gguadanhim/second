@@ -188,7 +188,7 @@ namespace Second
 
                     var listaConvites = from p in banco.amigosSet 
                                        where p.UsuarioSet.Id == alUsuario
-                                          && p.Convidados.Perfil_Id == alAmigo
+                                          && p.Convidados.Id == alAmigo
                                        select p;
 
                     if (listaConvites.Count() == 0)
