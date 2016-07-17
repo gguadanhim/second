@@ -14,7 +14,7 @@ namespace Second
     
     public partial class view_rank
     {
-        public int UsuarioSet_Id { get; set; }
+        public long UsuarioSet_Id { get; set; }
         public Nullable<long> rank { get; set; }
     }
 }

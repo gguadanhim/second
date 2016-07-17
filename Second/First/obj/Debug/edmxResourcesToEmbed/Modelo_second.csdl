@@ -85,7 +85,7 @@
     <Key>
       <PropertyRef Name="UsuarioSet_Id" />
     </Key>
-    <Property Name="UsuarioSet_Id" Type="Int32" Nullable="false" />
+    <Property Name="UsuarioSet_Id" Type="Int64" Nullable="false" />
     <Property Name="rank" Type="Int64" />
   </EntityType>
 </Schema>

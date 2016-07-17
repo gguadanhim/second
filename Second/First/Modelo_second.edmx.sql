@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/17/2016 13:48:12
+-- Date Created: 07/17/2016 16:31:53
 -- Generated from EDMX file: D:\Git\second\second\First\Modelo_second.edmx
 -- --------------------------------------------------
 
@@ -94,7 +94,7 @@ GO
 
 -- Creating table 'view_rank'
 CREATE TABLE [dbo].[view_rank] (
-    [UsuarioSet_Id] int  NOT NULL,
+    [UsuarioSet_Id] bigint  NOT NULL,
     [rank] bigint  NULL
 );
 GO

@@ -25,8 +25,8 @@ select * from PerfilSet
 update resultados_usuarioSet set pontos = 10 where UsuarioSet_Id = 4
 commit
 
-
---CREATE VIEW view_rank AS
+--drop VIEW view_rank
+CREATE VIEW view_rank AS
 SELECT UsuarioSet_Id,
 	   Rank() OVER (ORDER BY pontos desc) AS rank
 FROM resultados_usuarioSet
