@@ -99,7 +99,7 @@ namespace Second
             return lbRetorno;
         }
 
-        public long cadastrarUsuario(String asUserId,String asUUID,byte[] asFoto, String asNome)
+        public long cadastrarUsuario(int alID, String asUserId,String asUUID,byte[] asFoto, String asNome)
         {
             long llCodigoUsuario = -1;
             try
@@ -115,7 +115,8 @@ namespace Second
                     lUsuario.PerfilSet = lPerfil;
                     lUsuario.nick = asUserId;
                     lUsuario.uuid = asUUID;
-                    
+                    lUsuario.Id = alID;
+
                     banco.UsuarioSet.Add(lUsuario);
                     banco.SaveChanges();
                     llCodigoUsuario = lUsuario.Id;

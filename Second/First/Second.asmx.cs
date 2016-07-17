@@ -88,9 +88,9 @@ namespace Second
         }
 
         [WebMethod]
-        public long CadastrarUsuario(String asUserId,String asUUID,byte[] asFoto,String asNome)
+        public long CadastrarUsuario(int alID, String asUserId,String asUUID,byte[] asFoto,String asNome)
         {
-            return iControleUsuarios.cadastrarUsuario(asUserId, asUUID, asFoto,asNome);
+            return iControleUsuarios.cadastrarUsuario(alID, asUserId, asUUID, asFoto, asNome);
         }
 
         [WebMethod]
