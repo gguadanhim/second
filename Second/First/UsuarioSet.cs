@@ -21,7 +21,7 @@ namespace Second
             this.meus_convites = new HashSet<amigos>();
         }
     
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string nick { get; set; }
         public string uuid { get; set; }
         public int Perfil_Id { get; set; }

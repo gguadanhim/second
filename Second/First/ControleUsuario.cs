@@ -99,7 +99,7 @@ namespace Second
             return lbRetorno;
         }
 
-        public long cadastrarUsuario(int alID, String asUserId,String asUUID,byte[] asFoto, String asNome)
+        public long cadastrarUsuario(long alID, String asUserId,String asUUID,byte[] asFoto, String asNome)
         {
             long llCodigoUsuario = -1;
             try

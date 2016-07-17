@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/22/2016 00:12:48
+-- Date Created: 07/17/2016 13:32:54
 -- Generated from EDMX file: D:\Git\second\second\First\Modelo_second.edmx
 -- --------------------------------------------------
 
@@ -34,17 +34,20 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[amigosSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[amigosSet];
+GO
 IF OBJECT_ID(N'[dbo].[PerfilSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PerfilSet];
-GO
-IF OBJECT_ID(N'[dbo].[UsuarioSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UsuarioSet];
 GO
 IF OBJECT_ID(N'[dbo].[resultados_usuarioSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[resultados_usuarioSet];
 GO
-IF OBJECT_ID(N'[dbo].[amigosSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[amigosSet];
+IF OBJECT_ID(N'[dbo].[UsuarioSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UsuarioSet];
+GO
+IF OBJECT_ID(N'[dbecc20a0950a3450cad9aa555018154efModelStoreContainer].[view_rank]', 'U') IS NOT NULL
+    DROP TABLE [dbecc20a0950a3450cad9aa555018154efModelStoreContainer].[view_rank];
 GO
 
 -- --------------------------------------------------
@@ -56,13 +59,13 @@ CREATE TABLE [dbo].[PerfilSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [foto] varbinary(max)  NOT NULL,
     [nome] nvarchar(max)  NOT NULL,
-    [UsuarioSet_Id] int  NOT NULL
+    [UsuarioSet_Id] bigint  NOT NULL
 );
 GO
 
 -- Creating table 'UsuarioSet'
 CREATE TABLE [dbo].[UsuarioSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
+    [Id] bigint  NOT NULL,
     [nick] nvarchar(max)  NOT NULL,
     [uuid] nvarchar(max)  NOT NULL,
     [Perfil_Id] int  NOT NULL
@@ -76,7 +79,7 @@ CREATE TABLE [dbo].[resultados_usuarioSet] (
     [derrotas] int  NOT NULL,
     [desistencias] int  NOT NULL,
     [pontos] int  NOT NULL,
-    [UsuarioSet_Id] int  NOT NULL
+    [UsuarioSet_Id] bigint  NOT NULL
 );
 GO
 
@@ -84,8 +87,15 @@ GO
 CREATE TABLE [dbo].[amigosSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [aceite] int  NOT NULL,
+    [UsuarioSet_Id] bigint  NOT NULL,
+    [Convidados_Id] bigint  NOT NULL
+);
+GO
+
+-- Creating table 'view_rank'
+CREATE TABLE [dbo].[view_rank] (
     [UsuarioSet_Id] int  NOT NULL,
-    [Convidados_Id] int  NOT NULL
+    [rank] bigint  NULL
 );
 GO
 
@@ -115,6 +125,12 @@ GO
 ALTER TABLE [dbo].[amigosSet]
 ADD CONSTRAINT [PK_amigosSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [UsuarioSet_Id] in table 'view_rank'
+ALTER TABLE [dbo].[view_rank]
+ADD CONSTRAINT [PK_view_rank]
+    PRIMARY KEY CLUSTERED ([UsuarioSet_Id] ASC);
 GO
 
 -- --------------------------------------------------
