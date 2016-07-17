@@ -39,6 +39,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="view_rank">
+      <EntityTypeMapping TypeName="IsTypeOf(dbecc20a0950a3450cad9aa555018154efModel.view_rank)">
+        <MappingFragment StoreEntitySet="view_rank">
+          <ScalarProperty Name="UsuarioSet_Id" ColumnName="UsuarioSet_Id" />
+          <ScalarProperty Name="rank" ColumnName="rank" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="PerfilSetUsuarioSet" TypeName="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" StoreEntitySet="PerfilSet">
       <EndProperty Name="UsuarioSet">
         <ScalarProperty Name="Id" ColumnName="UsuarioSet_Id" />
@@ -71,13 +79,5 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="view_rank">
-      <EntityTypeMapping TypeName="dbecc20a0950a3450cad9aa555018154efModel.view_rank">
-        <MappingFragment StoreEntitySet="view_rank">
-          <ScalarProperty Name="rank" ColumnName="rank" />
-          <ScalarProperty Name="UsuarioSet_Id" ColumnName="UsuarioSet_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

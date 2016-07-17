@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/17/2016 13:32:54
+-- Date Created: 07/17/2016 13:48:12
 -- Generated from EDMX file: D:\Git\second\second\First\Modelo_second.edmx
 -- --------------------------------------------------
 
@@ -34,20 +34,20 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[amigosSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[amigosSet];
-GO
 IF OBJECT_ID(N'[dbo].[PerfilSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PerfilSet];
-GO
-IF OBJECT_ID(N'[dbo].[resultados_usuarioSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[resultados_usuarioSet];
 GO
 IF OBJECT_ID(N'[dbo].[UsuarioSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UsuarioSet];
 GO
-IF OBJECT_ID(N'[dbecc20a0950a3450cad9aa555018154efModelStoreContainer].[view_rank]', 'U') IS NOT NULL
-    DROP TABLE [dbecc20a0950a3450cad9aa555018154efModelStoreContainer].[view_rank];
+IF OBJECT_ID(N'[dbo].[resultados_usuarioSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[resultados_usuarioSet];
+GO
+IF OBJECT_ID(N'[dbo].[amigosSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[amigosSet];
+GO
+IF OBJECT_ID(N'[dbo].[view_rank]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[view_rank];
 GO
 
 -- --------------------------------------------------
@@ -57,7 +57,7 @@ GO
 -- Creating table 'PerfilSet'
 CREATE TABLE [dbo].[PerfilSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [foto] varbinary(max)  NOT NULL,
+    [foto] varbinary(max)  NULL,
     [nome] nvarchar(max)  NOT NULL,
     [UsuarioSet_Id] bigint  NOT NULL
 );

@@ -33,7 +33,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="foto" Type="varbinary(max)" Nullable="false" />
+    <Property Name="foto" Type="varbinary(max)" Nullable="true" />
     <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UsuarioSet_Id" Type="bigint" Nullable="false" />
   </EntityType>
@@ -130,7 +130,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="UsuarioSet" Relationship="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" FromRole="PerfilSet" ToRole="UsuarioSet" />
         </EntityType>
