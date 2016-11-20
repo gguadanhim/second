@@ -27,7 +27,7 @@ namespace Second
                     if (listaUsuarios.Count() > 0)
                     {
                         lDadosPerfil = new DadosPerfil();
-                        lDadosPerfil.iFoto = listaUsuarios.First().PerfilSet.foto;
+                        //lDadosPerfil.iFoto = listaUsuarios.First().PerfilSet.foto;
                         lDadosPerfil.isNome = listaUsuarios.First().PerfilSet.nome;
                         lDadosPerfil.isNick = listaUsuarios.First().nick;
                     }
@@ -80,10 +80,10 @@ namespace Second
 
                     if (listaUsuarios.Count() > 0)
                     {
-                        if (aDadosPerfil.iFoto != null)
+                        /*if (aDadosPerfil.iFoto != null)
                         {
                             listaUsuarios.First().PerfilSet.foto = aDadosPerfil.iFoto;
-                        }
+                        }*/
                         listaUsuarios.First().PerfilSet.nome = aDadosPerfil.isNome;
                         
                         banco.SaveChanges();
@@ -99,7 +99,7 @@ namespace Second
             return lbRetorno;
         }
 
-        public long cadastrarUsuario(long alID, String asUserId,String asUUID,byte[] asFoto, String asNome)
+        public long cadastrarUsuario(long alID, String asUserId,String asUUID, String asNome)
         {
             long llCodigoUsuario = -1;
             try
@@ -109,7 +109,6 @@ namespace Second
                     UsuarioSet lUsuario = new UsuarioSet();
                     PerfilSet lPerfil = new PerfilSet();
 
-                    lPerfil.foto = asFoto;
                     lPerfil.nome = asNome;
                     
                     lUsuario.PerfilSet = lPerfil;

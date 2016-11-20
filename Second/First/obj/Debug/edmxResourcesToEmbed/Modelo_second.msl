@@ -5,8 +5,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(dbecc20a0950a3450cad9aa555018154efModel.PerfilSet)">
         <MappingFragment StoreEntitySet="PerfilSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="foto" ColumnName="foto" />
           <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="id_imagem" ColumnName="id_imagem" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -113,7 +113,7 @@ namespace Second
                             lDados.ilCodigo = item.Id;
                             lDados.isNick = item.nick;
                             lDados.isNome = item.PerfilSet.nome;
-                            lDados.iFoto = item.PerfilSet.foto;
+                            //lDados.iFoto = item.PerfilSet.foto;
                             ilListaAmigos.Add(lDados);
                         }
                     }
@@ -150,7 +150,7 @@ namespace Second
                         lDados.ilCodigo = item.Convidados.Id;
                         lDados.isNick = item.Convidados.nick;
                         lDados.isNome = item.Convidados.PerfilSet.nome;
-                        lDados.iFoto = item.Convidados.PerfilSet.foto;
+                        //lDados.iFoto = item.Convidados.PerfilSet.foto;
                         lDados.ilConviteAceito = item.aceite; 
 
                         ilListaAmigos.Add(lDados);
@@ -162,7 +162,7 @@ namespace Second
                         lDados.ilCodigo = item.UsuarioSet.Id;
                         lDados.isNick = item.UsuarioSet.nick;
                         lDados.isNome = item.UsuarioSet.PerfilSet.nome;
-                        lDados.iFoto = item.UsuarioSet.PerfilSet.foto;
+                        //lDados.iFoto = item.UsuarioSet.PerfilSet.foto;
                         lDados.ilConviteAceito = 2;
 
                         ilListaAmigos.Add(lDados);

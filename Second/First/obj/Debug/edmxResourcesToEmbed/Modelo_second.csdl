@@ -5,9 +5,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="UsuarioSet" Relationship="dbecc20a0950a3450cad9aa555018154efModel.PerfilSetUsuarioSet" FromRole="PerfilSet" ToRole="UsuarioSet" />
+    <Property Name="id_imagem" Type="Int16" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioSet">
     <Key>

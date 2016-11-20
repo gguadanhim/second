@@ -155,5 +155,18 @@ namespace Second
             }
             return liRetorno;
         }
+
+        public DadosUsuario getUsuarioOponente(){
+            DadosUsuario lOponente = null;
+
+            if (this.ibJogadorPrincipal){
+                lOponente = this.iDadosPartida.lUsuario2;
+            }
+            else
+            {
+                lOponente = this.iDadosPartida.lUsuario1;
+            }
+            return lOponente;
+        }
     }
 }

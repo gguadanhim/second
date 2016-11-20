@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/17/2016 16:31:53
+-- Date Created: 08/01/2016 23:38:09
 -- Generated from EDMX file: D:\Git\second\second\First\Modelo_second.edmx
 -- --------------------------------------------------
 
@@ -57,8 +57,8 @@ GO
 -- Creating table 'PerfilSet'
 CREATE TABLE [dbo].[PerfilSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [foto] varbinary(max)  NULL,
     [nome] nvarchar(max)  NOT NULL,
+    [id_imagem] smallint  NOT NULL,
     [UsuarioSet_Id] bigint  NOT NULL
 );
 GO

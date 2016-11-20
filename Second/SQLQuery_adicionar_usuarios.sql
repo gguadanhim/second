@@ -21,12 +21,19 @@ select * from view_rank where UsuarioSet_id = 4
 select * from  resultados_usuarioSet
 select * from UsuarioSet
 select * from PerfilSet
+select * from amigosSet
 
 update resultados_usuarioSet set pontos = 10 where UsuarioSet_Id = 4
 commit
 
+
+delete Usuarioset where id = 1065686606857957
+delete resultados_usuarioSet where UsuarioSet_Id = 1065686606857957
+delete AmigosSet where UsuarioSet_Id = 1065686606857957
+delete AmigosSet where Convidados_Id = 1065686606857957
+
 --drop VIEW view_rank
-CREATE VIEW view_rank AS
+--CREATE VIEW view_rank AS
 SELECT UsuarioSet_Id,
 	   Rank() OVER (ORDER BY pontos desc) AS rank
 FROM resultados_usuarioSet

@@ -28,8 +28,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="foto" Type="varbinary(max)" Nullable="true" />
     <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="id_imagem" Type="smallint" Nullable="false" />
     <Property Name="UsuarioSet_Id" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioSet">

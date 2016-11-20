@@ -88,9 +88,9 @@ namespace Second
         }
 
         [WebMethod]
-        public long CadastrarUsuario(long alID, String asUserId,String asUUID,byte[] asFoto,String asNome)
+        public long CadastrarUsuario(long alID, String asUserId,String asUUID,String asNome)
         {
-            return iControleUsuarios.cadastrarUsuario(alID, asUserId, asUUID, asFoto, asNome);
+            return iControleUsuarios.cadastrarUsuario(alID, asUserId, asUUID, asNome);
         }
 
         [WebMethod]
@@ -185,6 +185,21 @@ namespace Second
                 }
            }
 
+            return ldadoRetorno;
+        }
+
+        [WebMethod]
+        public DadosRetorno BuscarImagemPlayerAdversario(long aiUsuario)
+        {
+            DadosRetorno ldadoRetorno = new DadosRetorno();
+            DadosUsuario lDadosUsuario;
+            DadosPerfil lDadosPerfil;
+
+            lDadosUsuario = controlePartidas.getDadosUsuario(aiUsuario).getUsuarioOponente();
+            lDadosPerfil = iControleUsuarios.buscarDadosPerfil(lDadosUsuario.iiCodigo);
+
+            //ldadoRetorno.liCodigo = lDadosPerfil.i;
+            
             return ldadoRetorno;
         }
 

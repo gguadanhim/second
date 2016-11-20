@@ -15,8 +15,8 @@ namespace Second
     public partial class PerfilSet
     {
         public int Id { get; set; }
-        public byte[] foto { get; set; }
         public string nome { get; set; }
+        public short id_imagem { get; set; }
     
         public virtual UsuarioSet UsuarioSet { get; set; }
     }
